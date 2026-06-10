@@ -52,10 +52,10 @@ export default function Home() {
             <div className="hero-actions">
               <div className="install-block">
                 <span className="terminal-prompt">$</span>
-                <input 
-                  type="text" 
-                  value="npx -y costaffective-mcp@latest serve" 
-                  readOnly 
+                <input
+                  type="text"
+                  value="curl -fsSL https://raw.githubusercontent.com/okyashgajjar/costaffective-mcp/main/install.sh | bash"
+                  readOnly
                 />
               </div>
               <div className="flex gap-3 mt-2 sm:mt-0">
@@ -146,7 +146,7 @@ export default function Home() {
             Direct measurements of context efficiency and API footprint comparing CostAffective against CodeGraph on large repositories.
           </p>
         </div>
-        
+
         {/* Static Comparison Table */}
         <div className="bg-white border border-[#E5E5E0] rounded-lg overflow-hidden shadow-sm max-w-4xl mx-auto mb-6">
           <div className="p-6 border-b border-[#E5E5E0] flex justify-between items-center bg-[#FAF9F6]">
@@ -318,61 +318,61 @@ export default function Home() {
           </p>
         </div>
         <div className="max-w-[750px] mx-auto flex flex-col items-center gap-6">
-          <Script 
-            src="https://platform.linkedin.com/badges/js/profile.js" 
-            strategy="afterInteractive" 
+          <Script
+            src="https://platform.linkedin.com/badges/js/profile.js"
+            strategy="afterInteractive"
           />
           <div className="w-full flex justify-center overflow-x-auto py-2">
-            <div 
-              className="badge-base LI-profile-badge" 
-              data-locale="en_US" 
-              data-size="large" 
-              data-theme="light" 
-              data-type="HORIZONTAL" 
-              data-vanity="okyashgajjar" 
+            <div
+              className="badge-base LI-profile-badge"
+              data-locale="en_US"
+              data-size="large"
+              data-theme="light"
+              data-type="HORIZONTAL"
+              data-vanity="okyashgajjar"
               data-version="v1"
             >
-              <a 
-                className="badge-base__link LI-simple-link" 
+              <a
+                className="badge-base__link LI-simple-link"
                 href="https://in.linkedin.com/in/okyashgajjar?trk=profile-badge"
               >
                 Yash Gajjar
               </a>
             </div>
           </div>
-          
+
           <div className="flex flex-wrap gap-6 justify-center mt-2">
-            <a 
-              href="https://github.com/okyashgajjar" 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <a
+              href="https://github.com/okyashgajjar"
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-1.5 text-xs text-charcoal hover:text-primary transition font-semibold"
             >
               <Github size={14} />
               GitHub
             </a>
-            <a 
-              href="https://x.com/okyashgajjar" 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <a
+              href="https://x.com/okyashgajjar"
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-1.5 text-xs text-charcoal hover:text-primary transition font-semibold"
             >
               <Twitter size={14} />
               X / Twitter
             </a>
-            <a 
-              href="https://huggingface.co/okyashgajjar" 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <a
+              href="https://huggingface.co/okyashgajjar"
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-1.5 text-xs text-charcoal hover:text-primary transition font-semibold"
             >
               <span className="text-[10px] font-mono border border-charcoal/30 px-1 rounded">HF</span>
               HuggingFace
             </a>
-            <a 
-              href="https://ko-fi.com/okyashgajjar" 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <a
+              href="https://ko-fi.com/okyashgajjar"
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-1.5 text-xs text-charcoal hover:text-primary transition font-semibold"
             >
               ☕ Ko-Fi
