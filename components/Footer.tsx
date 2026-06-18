@@ -13,6 +13,7 @@ export default function Footer() {
         <div className="footer-links">
           <div className="link-group">
             <h5>Product</h5>
+            <Link href="/vision">Vision</Link>
             <Link href="/benchmarks">Benchmarks</Link>
             <Link href="/architecture">Architecture</Link>
             <Link href="/tools">MCP Tools</Link>
@@ -39,7 +40,7 @@ export default function Footer() {
           © {new Date().getFullYear()} CostAffective-MCP. Open Source under the MIT License.
         </div>
         <div className="tagline">
-          Save tokens. Buy Coffee ☕
+          Save tokens. Buy Coffee.
         </div>
       </div>
     </footer>

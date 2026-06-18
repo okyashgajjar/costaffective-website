@@ -31,6 +31,24 @@ export const faqsData: FAQItem[] = [
     category: 'performance'
   },
   {
+    id: 'prompt-cache-cost',
+    question: 'How does CostAffective reduce prompt-cache cost in long sessions?',
+    answer: 'In long sessions the dominant cost is usually the prompt cache, not the model output: every turn pays to read the entire resident context, and any change to earlier context or a short idle gap forces a full rewrite of it. A server cannot control how a client caches, but it can control how many tokens enter the context window. CostAffective keeps that window small by answering from a local index, budgeting summaries, and moving large output out of context with stash_context and recall, which makes every turn cheaper to read and cheaper to rewrite.',
+    category: 'performance'
+  },
+  {
+    id: 'stash-recall',
+    question: 'What do the stash_context and recall tools do?',
+    answer: 'stash_context parks a large blob (a whole file, a long command output, a generated report) out of the conversation and returns a short handle, so it does not sit in the context window being re-cached every turn. recall pulls back only the slice that matches a query, within a token budget. Nothing is lost: the full content is written to disk and is always re-fetchable. This is lossless context reduction: it relocates tokens rather than deleting them.',
+    category: 'core'
+  },
+  {
+    id: 'session-skill',
+    question: 'What is the costaffective-session skill?',
+    answer: 'It is a small piece of session-awareness guidance, about 275 tokens, that teaches the AI assistant to keep the session lean automatically: route large output through stash_context and recall, persist durable facts with remember, and prefer narrow retrieval over reading whole files. It is delivered to every MCP client through the protocol instructions field, plus a native Claude Code skill, so it applies once per session without you having to ask each time.',
+    category: 'core'
+  },
+  {
     id: 'works-with-codex',
     question: 'Does it work with Codex CLI?',
     answer: 'Yes. CostAffective is fully compatible with Codex CLI, Claude Code, Cursor, OpenCode, Antigravity, and any other IDE client supporting the standard Model Context Protocol (MCP).',

@@ -8,7 +8,12 @@ export function generateStaticParams() {
     { slug: 'find-symbol' },
     { slug: 'find-references' },
     { slug: 'find-callers' },
-    { slug: 'repository-summary' }
+    { slug: 'grep-code' },
+    { slug: 'repository-summary' },
+    { slug: 'index-repository' },
+    { slug: 'remember' },
+    { slug: 'stash-context' },
+    { slug: 'recall' }
   ];
 }
 
@@ -89,17 +94,98 @@ const TOOLS: Record<string, ToolDetail> = {
   },
   'repository-summary': {
     name: 'get_repository_summary',
-    purpose: 'Returns a high-level overview of the entire repository scope, including file counters, index structures, active watchdog locks, and tracked extensions.',
+    purpose: 'Returns a token-budgeted overview of the repository: languages, the top modules by symbol count, and key symbols. The output is hard-capped so it stays small no matter how large the repository is. Pass a module to drill into one directory on demand.',
+    inputs: [
+      { name: 'repo_path', type: 'string', required: true, desc: 'Absolute path to the workspace root.' },
+      { name: 'budget', type: 'string', required: false, desc: 'Output token cap: small (~500), medium (~1500), large (~3000). Default small.' },
+      { name: 'module', type: 'string', required: false, desc: 'Optional module name or directory path to drill into instead of the whole repo.' }
+    ],
+    outputs: 'A compact text overview: file and symbol counts, language mix, top modules with a "+N more" rollup, and entry points, all within the token budget.',
+    bestPractices: [
+      'Call this on first connection to learn the repo shape cheaply, without dumping a file tree into context.',
+      'Use the module argument to drill into one directory instead of widening the whole summary.'
+    ],
+    exampleInput: `{\n  "repo_path": "/path/to/repo",\n  "budget": "small"\n}`,
+    exampleOutput: `Files: 100\nSymbols: 988\nTest Files: 22\nLanguages: go:99, python:1\nModules:\n  retrieval (go) - 26 files, 296 symbols\n  treesitter (go) - 12 files, 105 symbols\n  +23 more modules (62 files, 587 symbols)\nEntry Points: cmd/costaffective/main.go`
+  },
+  'grep-code': {
+    name: 'grep_code',
+    purpose: 'Regex and full-text fallback search across the repository, for when a literal text match is more useful than a structural query.',
+    inputs: [
+      { name: 'pattern', type: 'string', required: true, desc: 'Regex or exact text pattern to search.' },
+      { name: 'repo_path', type: 'string', required: true, desc: 'Absolute path to the workspace root.' },
+      { name: 'budget', type: 'string', required: false, desc: 'Token boundary limit (small, medium, large).' }
+    ],
+    outputs: 'Matching lines with file and line coordinates, trimmed to the token budget.',
+    bestPractices: [
+      'Reach for the structural tools (find_symbol, search_code) first; use grep_code when only a literal match will do.',
+      'Supply a budget on broad patterns to avoid flooding the context window.'
+    ],
+    exampleInput: `{\n  "pattern": "WithInstructions",\n  "repo_path": "/path/to/repo",\n  "budget": "small"\n}`,
+    exampleOutput: `[\n  {\n    "file": "internal/mcpserver/server.go",\n    "line": 14,\n    "content": "server.WithInstructions(skill.Instructions()),"\n  }\n]`
+  },
+  'index-repository': {
+    name: 'index_repository',
+    purpose: 'Manually trigger a re-index of the repository. Usually unnecessary because the file watchdog re-indexes changed files automatically on save.',
     inputs: [
       { name: 'repo_path', type: 'string', required: true, desc: 'Absolute path to the workspace root.' }
     ],
-    outputs: 'Summary object detailing language distribution, file counts, and index file size.',
+    outputs: 'A short report of how many files were changed, skipped, deleted, and the new total.',
     bestPractices: [
-      'Execute this on first chat connection to learn file sizes and language scopes.',
-      'Check file count scales before running wide recursive grep tool calls.'
+      'Use only after a large external change (e.g. a branch switch) if you want to force a refresh immediately.',
+      'In normal use the watchdog keeps the index fresh, so you rarely need this.'
     ],
-    exampleInput: `{\n  "repo_path": "/home/mryg/Research-Architectures/CLI"\n}`,
-    exampleOutput: `{\n  "status": "ready",\n  "file_count": 28,\n  "languages": {\n    "go": "82%",\n    "markdown": "12%",\n    "yaml": "6%"\n  },\n  "index_size_mb": 14.2,\n  "watchdog": "active"\n}`
+    exampleInput: `{\n  "repo_path": "/path/to/repo"\n}`,
+    exampleOutput: `Repository re-indexed successfully.\nChanged: 12\nSkipped: 88\nDeleted: 0\nTotal: 100`
+  },
+  'remember': {
+    name: 'remember',
+    purpose: 'Persist a small durable fact (a decision, an entrypoint, a gotcha) to a per-repository store, so it does not have to be repeated inline in the conversation every time it is relevant. This keeps the context window small.',
+    inputs: [
+      { name: 'repo_path', type: 'string', required: true, desc: 'Absolute path to the workspace root.' },
+      { name: 'key', type: 'string', required: true, desc: 'Short label for the fact, e.g. "auth-entrypoint".' },
+      { name: 'fact', type: 'string', required: true, desc: 'The fact to remember, in one or two sentences.' }
+    ],
+    outputs: 'A short confirmation. The fact is stored per repository and survives across sessions.',
+    bestPractices: [
+      'Write down conclusions you would otherwise re-derive or re-paste each turn.',
+      'Retrieve facts later with recall instead of restating them inline.'
+    ],
+    exampleInput: `{\n  "repo_path": "/path/to/repo",\n  "key": "auth-entrypoint",\n  "fact": "Auth starts in server/auth.go Login()."\n}`,
+    exampleOutput: `Remembered "auth-entrypoint". Use recall(query="auth-entrypoint") to retrieve it.`
+  },
+  'stash-context': {
+    name: 'stash_context',
+    purpose: 'Park a large blob (a whole file, a long command or test output, a generated report) out of the conversation and get back a short handle. Nothing is lost: the full content is written to disk and remains re-fetchable with recall. This is the most direct lever on context-window size.',
+    inputs: [
+      { name: 'repo_path', type: 'string', required: true, desc: 'Absolute path to the workspace root.' },
+      { name: 'content', type: 'string', required: true, desc: 'The large text to stash out of context.' },
+      { name: 'label', type: 'string', required: false, desc: 'Optional short label describing the content.' }
+    ],
+    outputs: 'A tiny confirmation containing the handle and approximate token size kept out of context.',
+    bestPractices: [
+      'Stash large output instead of pasting it inline, where it would be re-cached every turn.',
+      'Then use recall with the handle to pull back only the slice you actually need.'
+    ],
+    exampleInput: `{\n  "repo_path": "/path/to/repo",\n  "content": "<5,000 lines of build log>",\n  "label": "ci-build-log"\n}`,
+    exampleOutput: `Stashed "ci-build-log" -> a1b2c3d4e5f6 (~18000 tokens kept out of context). Read only what you need with recall(source="a1b2c3d4e5f6", query=...).`
+  },
+  'recall': {
+    name: 'recall',
+    purpose: 'Take back only what you need: the budgeted slice of a stashed blob (by handle), or matching remembered facts, instead of re-reading the whole thing. This is the read side of the stash/recall loop.',
+    inputs: [
+      { name: 'repo_path', type: 'string', required: true, desc: 'Absolute path to the workspace root.' },
+      { name: 'query', type: 'string', required: true, desc: 'What to look for within the source.' },
+      { name: 'source', type: 'string', required: false, desc: 'A stash handle to read from, or "facts" for remembered facts. Omit to search both.' },
+      { name: 'budget', type: 'string', required: false, desc: 'Token budget for the returned slice (small, medium, large).' }
+    ],
+    outputs: 'Only the matching lines from the stash (or matching facts), trimmed to the token budget.',
+    bestPractices: [
+      'Pair with stash_context: stash the monster, then recall only the lines that match your query.',
+      'Narrow the query or raise the budget if the result is truncated.'
+    ],
+    exampleInput: `{\n  "repo_path": "/path/to/repo",\n  "source": "a1b2c3d4e5f6",\n  "query": "error",\n  "budget": "small"\n}`,
+    exampleOutput: `internal/build/step.go:142: error: undefined symbol "Foo"\n... +3 more matching lines (narrow the query or raise budget)`
   }
 };
 
@@ -111,6 +197,7 @@ export async function generateMetadata({ params }: PageProps) {
   return {
     title: `MCP Tool: ${tool.name} | CostAffective Specs`,
     description: `Learn how AI coding agents execute the ${tool.name} tool. Explore arguments, outputs, and copy-paste schemas.`,
+    alternates: { canonical: `/tools/${slug}` },
   };
 }
 

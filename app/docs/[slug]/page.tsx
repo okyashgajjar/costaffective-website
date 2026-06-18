@@ -117,15 +117,32 @@ costaffective install --all
 
 # Configure a specific editor target
 costaffective install --target cursor
-costaffective install --target claude-code
+costaffective install --target claude
 
 # Rebuild the binary from source before configuring clients
 costaffective install --build
 
+# Install without the session-awareness skill
+costaffective install --no-skill
+
 # Run idempotent repair mode (fixes broken paths/configs)
 costaffective install --repair</code></pre>
 
-      <h3>5. Diagnostics with Doctor Command</h3>
+      <h3>5. Session-Awareness Skill</h3>
+      <p>Installation also adds the costaffective-session skill, which teaches your editor to keep sessions lean (stash large output, recall only what is needed, remember durable facts). Every MCP client receives this guidance automatically through the server. You can also manage the native skill file directly:</p>
+      <pre><code># Write the Claude Code skill (also runs during install)
+costaffective skill install
+
+# Write it into the current project only
+costaffective skill install --local
+
+# Remove it
+costaffective skill uninstall
+
+# Print the guidance for manual placement in any tool
+costaffective skill print</code></pre>
+
+      <h3>6. Diagnostics with Doctor Command</h3>
       <p>Verify that the installation is intact and all IDE configurations are running with correct absolute binary paths:</p>
       <pre><code>costaffective doctor</code></pre>
       

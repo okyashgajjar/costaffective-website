@@ -9,6 +9,7 @@ export default function Navbar() {
 
   const links = [
     { href: '/', label: 'Overview' },
+    { href: '/vision', label: 'Vision' },
     { href: '/benchmarks', label: 'Benchmarks' },
     { href: '/architecture', label: 'Architecture' },
     { href: '/tools', label: 'Tools' },

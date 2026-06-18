@@ -1,435 +1,667 @@
 import Link from 'next/link';
-import { Shield, Cpu, RefreshCw, Layers, Terminal, Linkedin, Github, Twitter } from 'lucide-react';
+import {
+  Shield, Cpu, RefreshCw, Layers, Github, ArrowRight, Database,
+  Archive, Search, BookMarked, Terminal, BarChart3, Sparkles,
+  ChevronRight, Play, FileText
+} from 'lucide-react';
 import Script from 'next/script';
 import ArchitectureVisualizer from '@/components/ArchitectureVisualizer';
 import InteractiveTerminal from '@/components/InteractiveTerminal';
 import ASTSandbox from '@/components/ASTSandbox';
 import ModuleBrowser from '@/components/ModuleBrowser';
 import Configurator from '@/components/Configurator';
+import Reveal from '@/components/Reveal';
+import CopyCommand from '@/components/CopyCommand';
+
+const INSTALL_CMD = 'curl -fsSL https://raw.githubusercontent.com/okyashgajjar/costaffective-mcp/main/install.sh | bash';
 
 export default function Home() {
-  // JSON-LD structured schemas for homepage (SEO/GEO)
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
-    'name': 'CostAffective-MCP',
-    'applicationCategory': 'DeveloperApplication',
-    'operatingSystem': 'Linux, macOS, Windows',
-    'offers': {
-      '@type': 'Offer',
-      'price': '0.00',
-      'priceCurrency': 'USD'
-    },
-    'description': 'Local-first MCP server for repository intelligence and semantic code retrieval, designed to reduce context sizes and costs for coding agents.',
-    'aggregateRating': {
-      '@type': 'AggregateRating',
-      'ratingValue': '4.9',
-      'reviewCount': '142'
-    }
+    name: 'CostAffective-MCP',
+    applicationCategory: 'DeveloperApplication',
+    operatingSystem: 'Linux, macOS, Windows',
+    offers: { '@type': 'Offer', price: '0.00', priceCurrency: 'USD' },
+    description:
+      'Local-first MCP server for repository intelligence and semantic code retrieval, designed to reduce context size and prompt-cache cost for AI coding agents.',
+    aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '142' },
   };
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      {/* Hero Section */}
-      <section className="hero-section">
+      {/* ========================== HERO ========================== */}
+      <section className="hero-section" id="hero">
+        <div className="hero-grid-bg" />
         <div className="hero-container">
           <div>
-            <div className="vibe-pill">
-              <span className="pill-dot animate-pulse"></span>
-              <span className="pill-text">Local-First Repo Intelligence</span>
-            </div>
-            <h1 className="hero-title text-charcoal font-bold leading-tight">
-              Convert Your Remaining <span>Cost Into Coffee ☕</span>
-            </h1>
-            <p className="hero-subtitle text-light leading-relaxed">
-              Reduce repository exploration costs, shrink context windows by up to 45.9%, and help AI coding agents find deterministic codebase answers faster.
-            </p>
-            <div className="hero-actions">
-              <div className="install-block">
-                <span className="terminal-prompt">$</span>
-                <input
-                  type="text"
-                  value="curl -fsSL https://raw.githubusercontent.com/okyashgajjar/costaffective-mcp/main/install.sh | bash"
-                  readOnly
-                />
+            <Reveal y={20}>
+              <div className="vibe-pill">
+                <span className="pill-dot animate-pulse" />
+                <span className="pill-text">Local-First Repository Intelligence</span>
               </div>
-              <div className="flex gap-3 mt-2 sm:mt-0">
-                <Link href="/docs/install" className="btn btn-action">
-                  Get Started
-                </Link>
-                <Link href="/benchmarks" className="btn btn-secondary">
-                  View Benchmarks
-                </Link>
+            </Reveal>
+
+            <Reveal y={24} delay={0.05}>
+              <h1 className="hero-title">
+                Coding agents should&nbsp;behave like&nbsp;<span className="hero-gradient-text">experienced engineers</span>.
+              </h1>
+            </Reveal>
+
+            <Reveal y={20} delay={0.1}>
+              <p className="hero-subtitle">
+                An experienced engineer does not re-read the same files every turn, rediscover the same symbols,
+                or carry a 5,000-line log in memory. CostAffective gives your AI coding agent the same instincts —
+                from a local index, not from file dumps.
+              </p>
+            </Reveal>
+
+            <Reveal y={16} delay={0.18}>
+              <div className="hero-actions">
+                <CopyCommand command={INSTALL_CMD} />
+                <div className="flex gap-3">
+                  <Link href="/docs/install" className="btn btn-action">
+                    Get Started
+                  </Link>
+                  <Link href="/vision" className="btn btn-secondary">
+                    Read the Vision
+                  </Link>
+                </div>
               </div>
-            </div>
-          </div>
-          <div>
-            <InteractiveTerminal />
-          </div>
-        </div>
-      </section>
+            </Reveal>
 
-      {/* Prime Claim Banner */}
-      <div className="bg-[#FAF9F6] border-y border-[#E5E5E0] py-4 px-6">
-        <div className="max-w-7xl mx-auto flex flex-wrap justify-center md:justify-between items-center gap-y-2 gap-x-6 text-center text-xs md:text-sm font-mono text-charcoal font-semibold">
-          <div className="flex items-center gap-2">
-            <span className="text-primary font-bold">45.9%</span> fewer tokens
-          </div>
-          <span className="text-grey/40 hidden md:inline">•</span>
-          <div className="flex items-center gap-2">
-            <span className="text-primary font-bold">54.3%</span> fewer exploration loops
-          </div>
-          <span className="text-grey/40 hidden md:inline">•</span>
-          <div className="flex items-center gap-2">
-            <span className="text-primary font-bold">42.1%</span> fewer tool interactions
-          </div>
-          <span className="text-grey/40 hidden md:inline">•</span>
-          <div className="flex items-center gap-2">
-            <span className="text-[#0066CC] font-bold">100%</span> Local-First
-          </div>
-        </div>
-      </div>
-
-      {/* Core Claims Grid */}
-      <section className="benefits-section">
-        <div className="grid-benefits">
-          <div className="benefit-card">
-            <div className="benefit-icon">
-              <Shield size={20} />
-            </div>
-            <h3 className="font-serif font-bold text-lg text-charcoal">100% Local-First</h3>
-            <p className="text-light text-xs mt-2">
-              All index calculations, SQLite queries, and AST compiles execute locally. No code telemetry egress.
-            </p>
-          </div>
-          <div className="benefit-card">
-            <div className="benefit-icon">
-              <Cpu size={20} />
-            </div>
-            <h3 className="font-serif font-bold text-lg text-charcoal">MCP Compatible</h3>
-            <p className="text-light text-xs mt-2">
-              Plugs seamlessly into Claude Code, Cursor, Codex, VS Code, and any client supporting the stdio protocol.
-            </p>
-          </div>
-          <div className="benefit-card">
-            <div className="benefit-icon">
-              <RefreshCw size={20} />
-            </div>
-            <h3 className="font-serif font-bold text-lg text-charcoal">8ms Sync Watchdog</h3>
-            <p className="text-light text-xs mt-2">
-              Incremental watchdog captures file modifications on-save and updates only changed checksums instantly.
-            </p>
-          </div>
-          <div className="benefit-card">
-            <div className="benefit-icon">
-              <Layers size={20} />
-            </div>
-            <h3 className="font-serif font-bold text-lg text-charcoal">Context Compress</h3>
-            <p className="text-light text-xs mt-2">
-              Returns compressed, semantic code definitions instead of bloated files, preserving LLM context size.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Benchmarks Section */}
-      <section className="section-container" id="benchmarks">
-        <div className="section-header">
-          <span className="section-pill">Retriever Performance</span>
-          <h2 className="font-serif font-bold text-3xl">Quality Benchmarks</h2>
-          <p className="section-desc">
-            Direct measurements of context efficiency and API footprint comparing CostAffective against CodeGraph on large repositories.
-          </p>
-        </div>
-
-        {/* Static Comparison Table */}
-        <div className="bg-white border border-[#E5E5E0] rounded-lg overflow-hidden shadow-sm max-w-4xl mx-auto mb-6">
-          <div className="p-6 border-b border-[#E5E5E0] flex justify-between items-center bg-[#FAF9F6]">
-            <div>
-              <h3 className="font-serif font-bold text-lg text-charcoal">Featured Case Study: Continue OSS (3,203 Files)</h3>
-              <span className="text-[10px] text-grey uppercase tracking-wider font-semibold">CostAffective vs CodeGraph</span>
-            </div>
-            <span className="text-[10px] bg-green-500 text-white font-mono px-2 py-0.5 rounded font-bold uppercase">
-              45.9% Savings
-            </span>
-          </div>
-          <div className="overflow-x-auto font-sans text-sm">
-            <table className="w-full text-left">
-              <thead className="bg-[#FAF9F6] text-grey uppercase text-[10px] font-bold border-b border-[#E5E5E0]">
-                <tr>
-                  <th className="p-4">Evaluation Metric</th>
-                  <th className="p-4">CostAffective</th>
-                  <th className="p-4">CodeGraph</th>
-                  <th className="p-4">Winner</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[#E5E5E0]">
-                {[
-                  { metric: 'Total Tokens', costAffective: '4,708,835', codeGraph: '8,707,328', winner: '🏆 CostAffective' },
-                  { metric: 'Subagent Calls (Exploration Loops)', costAffective: '43', codeGraph: '94', winner: '🏆 CostAffective' },
-                  { metric: 'API Calls (Tool Interactions)', costAffective: '89', codeGraph: '134', winner: '🏆 CostAffective' },
-                  { metric: 'Deliverables Generated', costAffective: '4', codeGraph: '4', winner: 'Tie' }
-                ].map((row) => (
-                  <tr key={row.metric} className={row.metric === 'Total Tokens' ? 'bg-[#0066CC]/5 font-semibold' : ''}>
-                    <td className="p-4 font-semibold text-charcoal">{row.metric}</td>
-                    <td className="p-4 font-mono text-[#0066CC] font-bold">{row.costAffective}</td>
-                    <td className="p-4 font-mono text-grey">{row.codeGraph}</td>
-                    <td className="p-4 font-mono text-green-700 font-semibold">{row.winner}</td>
-                  </tr>
+            <Reveal y={10} delay={0.22}>
+              <div className="trust-bar">
+                <span className="trust-label">Works with</span>
+                {['Claude Code', 'Cursor', 'Codex', 'OpenCode', 'Antigravity'].map((c) => (
+                  <span key={c} className="trust-chip">
+                    <span className="dot" />
+                    {c}
+                  </span>
                 ))}
-              </tbody>
-            </table>
+              </div>
+            </Reveal>
           </div>
-        </div>
 
-        <div className="text-center mt-6">
-          <Link href="/benchmarks" className="btn btn-primary font-mono text-xs inline-flex items-center gap-1">
-            View Full Benchmarks Suite →
-          </Link>
+          <Reveal y={20} delay={0.15}>
+            <InteractiveTerminal />
+          </Reveal>
         </div>
       </section>
 
-      {/* How It Works Section (AST Sandbox) */}
-      <section className="section-container border-t border-[#E5E5E0]">
-        <div className="section-header">
-          <span className="section-pill">Static Analysis</span>
-          <h2 className="font-serif font-bold text-3xl">How It Works</h2>
-          <p className="section-desc">
-            CostAffective indexes codebases statically using compilers to map declarations. Experience it live inside our AST compiler simulator.
-          </p>
-        </div>
-        <ASTSandbox />
-      </section>
-
-      {/* Architecture Section */}
-      <section className="section-container border-t border-[#E5E5E0]" id="architecture">
-        <div className="section-header">
-          <span className="section-pill">System Layout</span>
-          <h2 className="font-serif font-bold text-3xl">Architectural Overview</h2>
-          <p className="section-desc">
-            Hover or click components inside the relational flow diagram to examine operational modules.
-          </p>
-        </div>
-        <ArchitectureVisualizer />
-        <div className="text-center mt-8">
-          <Link href="/architecture" className="btn btn-secondary font-medium text-xs">
-            Deep-Dive Architecture Documentation & Diagrams →
-          </Link>
-        </div>
-      </section>
-
-      {/* Codebase Explorer Section */}
-      <section className="section-container border-t border-[#E5E5E0]">
-        <div className="section-header">
-          <span className="section-pill">Module Maps</span>
-          <h2 className="font-serif font-bold text-3xl">Codebase Inspector</h2>
-          <p className="section-desc">
-            Browse through directories of the actual CostAffective local codebase to verify its architecture.
-          </p>
-        </div>
-        <ModuleBrowser />
-      </section>
-
-      {/* Configuration Section */}
-      <section className="section-container border-t border-[#E5E5E0]" id="configuration">
-        <div className="section-header">
-          <span className="section-pill">Setup Guides</span>
-          <h2 className="font-serif font-bold text-3xl">Editor Configurator</h2>
-          <p className="section-desc">
-            Select your IDE platform below to generate setup profiles.
-          </p>
-        </div>
-        <Configurator />
-      </section>
-
-      {/* Comparison Overview Section */}
-      <section className="section-container border-t border-[#E5E5E0]">
-        <div className="section-header">
-          <span className="section-pill">Comparisons</span>
-          <h2 className="font-serif font-bold text-3xl">CostAffective vs Alternatives</h2>
-          <p className="section-desc">
-            See how CostAffective outperforms legacy dependency graphs and simple file search tools.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          {[
-            { slug: 'codegraph', name: 'CodeGraph', desc: 'Saves 43.8% token context compared to heavy code-graph pointer files.' },
-            { slug: 'serena', name: 'Serena', desc: 'Restores offline security and local parsing without cloud data egress.' },
-            { slug: 'graphify', name: 'Graphify', desc: 'Opt for optimized symbol arrays instead of complex spatial coordinates.' },
-            { slug: 'ripgrep', name: 'ripgrep', desc: 'Retrieves logical scopes rather than noisy, generic text lines.' }
-          ].map((item) => (
-            <div key={item.slug} className="benefit-card flex flex-col justify-between">
-              <div>
-                <h3 className="font-serif font-bold text-lg text-charcoal">{item.name}</h3>
-                <p className="text-light text-xs mt-2 leading-relaxed">{item.desc}</p>
+      {/* ========================== STAT STRIP ========================== */}
+      <section className="section-container section-tight">
+        <Reveal>
+          <div className="stat-strip">
+            {[
+              { num: '45.9%', lbl: 'Fewer tokens', sub: 'vs CodeGraph on Continue OSS' },
+              { num: '54.3%', lbl: 'Fewer exploration loops', sub: '43 vs 94 agent callbacks' },
+              { num: '81.7%', lbl: 'Fewer tokens (small repo)', sub: '299K → 55K in one session' },
+              { num: '100%', lbl: 'Local-first', sub: 'No data ever leaves your machine' },
+            ].map((s) => (
+              <div key={s.lbl} className="stat-cell">
+                <div className="num">{s.num}</div>
+                <span className="lbl">{s.lbl}</span>
+                <span className="stat-sub">{s.sub}</span>
               </div>
-              <div className="mt-6">
-                <Link href={`/compare/${item.slug}`} className="text-xs font-semibold text-primary hover:underline">
-                  Read comparison & migration →
-                </Link>
-              </div>
+            ))}
+          </div>
+        </Reveal>
+      </section>
+
+      {/* ========================== COMBINED BENCHMARKS ========================== */}
+      <section className="benefits-section" id="benchmarks">
+        <div className="section-container">
+          <Reveal>
+            <div className="section-header">
+              <span className="eyebrow">Measured results</span>
+              <h2 className="font-bold text-3xl mt-3">Fewer tokens. Fewer calls. Faster sessions.</h2>
+              <p className="section-desc">
+                Same model. Same task. Same output quality. The difference is index-backed tools and context control.
+              </p>
             </div>
+          </Reveal>
+
+          <div className="benchmark-grid">
+            {/* Small repo */}
+            <Reveal delay={0.05}>
+              <div className="benchmark-card">
+                <div className="benchmark-header">
+                  <div className="flex items-center gap-2">
+                    <Terminal size={16} className="text-primary" />
+                    <span className="font-bold text-sm">Small repository</span>
+                  </div>
+                  <span className="benchmark-badge">81.7% saved</span>
+                </div>
+                <table className="benchmark-table">
+                  <thead>
+                    <tr>
+                      <th>Metric</th>
+                      <th>Without</th>
+                      <th>With</th>
+                      <th>Change</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="highlight">
+                      <td>Tokens consumed</td>
+                      <td className="old">299,300</td>
+                      <td className="new">54,745</td>
+                      <td className="winner">81.7% fewer</td>
+                    </tr>
+                    <tr>
+                      <td>Wall time</td>
+                      <td className="old">14.6s</td>
+                      <td className="new">6.7s</td>
+                      <td className="winner">2.2x faster</td>
+                    </tr>
+                    <tr>
+                      <td>Tool calls</td>
+                      <td className="old">10</td>
+                      <td className="new">3</td>
+                      <td className="winner">70% fewer</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </Reveal>
+
+            {/* Large repo */}
+            <Reveal delay={0.1}>
+              <div className="benchmark-card">
+                <div className="benchmark-header">
+                  <div className="flex items-center gap-2">
+                    <Database size={16} className="text-primary" />
+                    <span className="font-bold text-sm">Continue OSS (3,203 files)</span>
+                  </div>
+                  <span className="benchmark-badge">45.9% saved</span>
+                </div>
+                <table className="benchmark-table">
+                  <thead>
+                    <tr>
+                      <th>Metric</th>
+                      <th>CostAffective</th>
+                      <th>CodeGraph</th>
+                      <th>Winner</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      { metric: 'Total Tokens', a: '4,708,835', b: '8,707,328', w: 'CostAffective' },
+                      { metric: 'Exploration Loops', a: '43', b: '94', w: 'CostAffective' },
+                      { metric: 'API Calls', a: '89', b: '134', w: 'CostAffective' },
+                      { metric: 'Deliverables', a: '4', b: '4', w: 'Tie' },
+                    ].map((row) => (
+                      <tr key={row.metric} className={row.metric === 'Total Tokens' ? 'highlight' : ''}>
+                        <td>{row.metric}</td>
+                        <td className="new">{row.a}</td>
+                        <td className="old">{row.b}</td>
+                        <td className="winner">{row.w}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </Reveal>
+          </div>
+
+          <Reveal delay={0.15}>
+            <div className="text-center mt-8">
+              <Link href="/benchmarks" className="btn btn-action font-mono text-xs inline-flex items-center gap-1">
+                View full benchmark suite <ArrowRight size={13} />
+              </Link>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ========================== PROOF ========================== */}
+      <section className="section-container" id="proof">
+        <Reveal>
+          <div className="section-header">
+            <span className="eyebrow">See it in action</span>
+            <h2 className="font-bold text-3xl mt-3">Without CostAffective vs with</h2>
+            <p className="section-desc">
+              Same task. Same model. The left side reads files. The right side uses the index.
+            </p>
+          </div>
+        </Reveal>
+
+        <div className="proof-grid">
+          <Reveal delay={0.05}>
+            <div className="proof-card">
+              <div className="proof-label">
+                <span className="proof-badge bad">Without</span>
+                <span>10 tool calls · 14.6s · 299K tokens</span>
+              </div>
+              <a
+                href="https://raw.githubusercontent.com/okyashgajjar/costaffective-mcp/main/proofs/without-mcp-smallrepo-opencode.png"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="proof-image-link"
+              >
+                <img
+                  src="https://raw.githubusercontent.com/okyashgajjar/costaffective-mcp/main/proofs/without-mcp-smallrepo-opencode.png"
+                  alt="OpenCode without CostAffective — many tool calls, high token count"
+                  className="proof-image"
+                  loading="lazy"
+                />
+              </a>
+              <a
+                href="https://raw.githubusercontent.com/okyashgajjar/costaffective-mcp/main/proofs/opencode-without-costaffective.webm"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="proof-video-link"
+              >
+                <Play size={12} /> Watch video
+              </a>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <div className="proof-card">
+              <div className="proof-label">
+                <span className="proof-badge good">With</span>
+                <span>3 tool calls · 6.7s · 55K tokens</span>
+              </div>
+              <a
+                href="https://raw.githubusercontent.com/okyashgajjar/costaffective-mcp/main/proofs/with-mcp-smallrepo-opencode.png"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="proof-image-link"
+              >
+                <img
+                  src="https://raw.githubusercontent.com/okyashgajjar/costaffective-mcp/main/proofs/with-mcp-smallrepo-opencode.png"
+                  alt="OpenCode with CostAffective — minimal tool calls, low token count"
+                  className="proof-image"
+                  loading="lazy"
+                />
+              </a>
+              <a
+                href="https://raw.githubusercontent.com/okyashgajjar/costaffective-mcp/main/proofs/opencode-with-costaffective.webm"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="proof-video-link"
+              >
+                <Play size={12} /> Watch video
+              </a>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ========================== THE PROBLEM ========================== */}
+      <section className="benefits-section">
+        <div className="section-container">
+          <Reveal>
+            <div className="section-header">
+              <span className="eyebrow">The problem</span>
+              <h2 className="font-bold text-3xl mt-3">Why long sessions get expensive</h2>
+              <p className="section-desc">
+                The expensive part is not the model&apos;s output. It is everything around it.
+              </p>
+            </div>
+          </Reveal>
+
+          <div className="problem-grid">
+            {[
+              {
+                title: 'Repositories get re-explored',
+                body: 'Ask your coding agent "where is X defined" and it reads the file. Ask again five minutes later — it reads the same file again. Each read puts thousands of tokens into the context window.',
+                stat: '2-5x redundant file reads per session',
+              },
+              {
+                title: 'Context grows without being useful',
+                body: 'A typical session starts small. Then the model dumps a file to answer a question. Then a test output. Then a build log. None of these leave — they accumulate in the resident context window.',
+                stat: '455K tokens cached per turn in measured sessions',
+              },
+              {
+                title: 'The prompt cache makes it worse',
+                body: 'Every turn pays to read the entire resident context. Any change or idle gap forces a full rewrite. In one measured call, $2.84 of a $2.95 charge was the cache write — the output was under 4K tokens.',
+                stat: '$2.84 cache write vs $0.11 output in a real call',
+              },
+            ].map((item, i) => (
+              <Reveal key={item.title} delay={i * 0.06}>
+                <div className="problem-card">
+                  <h3 className="font-bold text-lg text-charcoal">{item.title}</h3>
+                  <p className="text-light text-sm mt-2 leading-relaxed">{item.body}</p>
+                  <div className="problem-stat">{item.stat}</div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal delay={0.2}>
+            <div className="text-center mt-10">
+              <Link href="/vision" className="link-anim text-sm inline-flex items-center gap-1">
+                Read the full reasoning <ArrowRight size={13} />
+              </Link>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ========================== THE SOLUTION ========================== */}
+      <section className="section-container">
+        <Reveal>
+          <div className="section-header">
+            <span className="eyebrow">How CostAffective fixes it</span>
+            <h2 className="font-bold text-3xl mt-3">One lever: shrink the context window</h2>
+            <p className="section-desc">
+              A server cannot control how the client caches. It can only control how many tokens ever enter the window.
+            </p>
+          </div>
+        </Reveal>
+
+        <div className="solution-grid">
+          {[
+            {
+              icon: <Database size={22} />,
+              title: 'Answer from a local index',
+              body: 'Navigation questions — "where is this defined", "who calls this" — are answered from a Tree-sitter SQLite index in a few tokens instead of by dumping source files.',
+            },
+            {
+              icon: <BookMarked size={22} />,
+              title: 'Remember facts instead of repeating',
+              body: 'The remember tool persists a durable fact per repository. The recall tool retrieves it later. Facts are written down once instead of re-derived every turn.',
+            },
+            {
+              icon: <Archive size={22} />,
+              title: 'Stash large output instead of pasting',
+              body: 'Stash_context parks a large blob out of context behind a ~20 token handle. Recall pulls back only the matching slice, within a token budget. Lossless.',
+            },
+            {
+              icon: <Sparkles size={22} />,
+              title: 'Session-awareness skill',
+              body: 'A 275-token guidance delivered to every MCP client teaches the model the lean workflow automatically. Also installable as a native Claude Code skill.',
+            },
+          ].map((item, i) => (
+            <Reveal key={item.title} delay={i * 0.07}>
+              <div className="benefit-card h-full">
+                <div className="benefit-icon">{item.icon}</div>
+                <h3 className="font-bold text-lg text-charcoal">{item.title}</h3>
+                <p className="text-light text-xs mt-2 leading-relaxed">{item.body}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
       </section>
 
-      {/* FAQ Teaser Section */}
-      <section className="section-container border-t border-[#E5E5E0]">
-        <div className="section-header">
-          <span className="section-pill">Questions</span>
-          <h2 className="font-serif font-bold text-3xl">Frequently Asked Questions</h2>
-          <p className="section-desc">
-            Find answers to common questions about indexing, token optimization, and IDE integrations.
-          </p>
+      {/* ========================== CORE BENEFITS ========================== */}
+      <section className="benefits-section">
+        <div className="section-container">
+          <Reveal>
+            <div className="section-header">
+              <span className="eyebrow">Why teams use it</span>
+              <h2 className="font-bold text-3xl mt-3">Built for cost, speed, and privacy</h2>
+              <p className="section-desc">Four properties that hold no matter how large the repository gets.</p>
+            </div>
+          </Reveal>
+          <div className="grid-benefits !px-0">
+            {[
+              { icon: <Shield size={20} />, title: '100% Local-First', body: 'All indexing, SQLite queries, and AST parsing run locally. No telemetry, no code egress.' },
+              { icon: <Cpu size={20} />, title: 'MCP Compatible', body: 'Plugs into Claude Code, Cursor, Codex, OpenCode, Antigravity, and any stdio MCP client.' },
+              { icon: <RefreshCw size={20} />, title: 'Incremental Sync', body: 'A file watchdog re-indexes only changed files on save, so the index stays fresh without full rebuilds.' },
+              { icon: <Layers size={20} />, title: 'Context Control', body: 'Returns compressed scopes, budgeted summaries, and out-of-context stashes instead of bloated files.' },
+            ].map((b, i) => (
+              <Reveal key={b.title} delay={i * 0.06}>
+                <div className="benefit-card h-full">
+                  <div className="benefit-icon">{b.icon}</div>
+                  <h3 className="font-bold text-lg text-charcoal">{b.title}</h3>
+                  <p className="text-light text-xs mt-2 leading-relaxed">{b.body}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
-        <div className="max-width-[800px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="border-b pb-4">
-            <h3 className="font-serif font-bold text-lg text-charcoal mb-2">How does CostAffective save prompt tokens?</h3>
-            <p className="text-light text-sm">
-              Instead of piping full files to LLMs during coding tasks, CostAffective extracts only structural declarations and scopes, trimming down input contexts by up to 45.9%.
+      </section>
+
+      {/* ========================== STASH → RECALL → REMEMBER ========================== */}
+      <section className="section-container">
+        <Reveal>
+          <div className="section-header">
+            <span className="eyebrow">Context control</span>
+            <h2 className="font-bold text-3xl mt-3">Stash the monster, recall the slice</h2>
+            <p className="section-desc">
+              Three tools form one loop that keeps the window small without ever losing information.
             </p>
           </div>
-          <div className="border-b pb-4">
-            <h3 className="font-serif font-bold text-lg text-charcoal mb-2">Does it send my codebase to external cloud APIs?</h3>
-            <p className="text-light text-sm">
-              No. CostAffective operates fully local. All compilation and SQLite index writes are done locally on your computer.
-            </p>
-          </div>
+        </Reveal>
+        <div className="loop-steps">
+          {[
+            { n: 1, icon: <Archive size={18} />, h: 'stash_context', p: 'A 5,000-line log goes to disk and returns a ~20 token handle instead of flooding the window.' },
+            { n: 2, icon: <Search size={18} />, h: 'recall', p: 'Pull back only the lines that match your query, trimmed to a token budget.' },
+            { n: 3, icon: <BookMarked size={18} />, h: 'remember', p: 'Keep the durable conclusion as a fact so it is never re-derived next turn.' },
+          ].map((s, i) => (
+            <Reveal key={s.h} delay={i * 0.08}>
+              <div className="loop-step">
+                <span className="step-num">{s.n}</span>
+                <h4 className="flex items-center gap-2">{s.icon}{s.h}</h4>
+                <p>{s.p}</p>
+              </div>
+            </Reveal>
+          ))}
         </div>
-        <div className="text-center mt-10">
-          <Link href="/faq" className="btn btn-secondary font-medium text-xs">
-            Browse All 30 Frequently Asked Questions →
-          </Link>
-        </div>
+        <Reveal>
+          <p className="text-center text-light text-sm mt-8 max-w-2xl mx-auto">
+            The <strong className="text-charcoal">costaffective-session</strong> skill teaches your editor to do this
+            automatically, delivered to every MCP client through the protocol&apos;s instructions field.
+          </p>
+        </Reveal>
       </section>
 
-      {/* Developer Profile Section */}
-      <section className="section-container border-t border-[#E5E5E0]">
-        <div className="section-header">
-          <span className="section-pill">Creator</span>
-          <h2 className="font-serif font-bold text-3xl text-charcoal">Developed by Yash Gajjar</h2>
-          <p className="section-desc">
-            Connect with the developer of CostAffective-MCP.
-          </p>
-        </div>
-        <div className="max-w-[750px] mx-auto flex flex-col items-center gap-6">
-          <Script
-            src="https://platform.linkedin.com/badges/js/profile.js"
-            strategy="afterInteractive"
-          />
-          <div className="w-full flex justify-center overflow-x-auto py-2">
-            <div
-              className="badge-base LI-profile-badge"
-              data-locale="en_US"
-              data-size="large"
-              data-theme="light"
-              data-type="HORIZONTAL"
-              data-vanity="okyashgajjar"
-              data-version="v1"
-            >
-              <a
-                className="badge-base__link LI-simple-link"
-                href="https://in.linkedin.com/in/okyashgajjar?trk=profile-badge"
-              >
-                Yash Gajjar
-              </a>
+      {/* ========================== TOOLS ========================== */}
+      <section className="benefits-section">
+        <div className="section-container">
+          <Reveal>
+            <div className="section-header">
+              <span className="eyebrow">The toolset</span>
+              <h2 className="font-bold text-3xl mt-3">Nine tools, one goal</h2>
+              <p className="section-desc">
+                Retrieval answers questions in a few tokens. Context-control keeps large content and durable facts
+                out of the window entirely.
+              </p>
             </div>
+          </Reveal>
+          <div className="tool-grid">
+            {[
+              { name: 'search_code', tag: 'retrieval', desc: 'Semantic AST search that returns relevant scopes, not whole files.' },
+              { name: 'find_symbol', tag: 'retrieval', desc: 'Resolve a definition to a location in a single index lookup.' },
+              { name: 'read_symbol', tag: 'retrieval', desc: 'Return a symbol\'s implementation body by name, from the indexed line range.' },
+              { name: 'find_references', tag: 'retrieval', desc: 'Every usage of a symbol, precomputed for impact analysis.' },
+              { name: 'find_callers', tag: 'retrieval', desc: 'Who calls this function, from stored call edges.' },
+              { name: 'get_repository_summary', tag: 'maint', desc: 'Token-budgeted repo map with drill-down. Stays small on any repo.' },
+              { name: 'index_repository', tag: 'maint', desc: 'Manual re-index. Usually unnecessary; the watchdog handles it.' },
+              { name: 'remember', tag: 'context', desc: 'Persist a durable fact per repository so it is never repeated inline.' },
+              { name: 'stash_context', tag: 'context', desc: 'Park a large blob out of context; get back a tiny handle. Lossless.' },
+              { name: 'recall', tag: 'context', desc: 'Pull back only the slice a query needs, from a stash or from facts.' },
+            ].map((t, i) => (
+              <Reveal key={t.name} delay={(i % 3) * 0.05} as="div">
+                <div className="tool-card h-full">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="tool-name">{t.name}</span>
+                    <span className={`tool-tag ${t.tag}`}>{t.tag === 'maint' ? 'maintain' : t.tag}</span>
+                  </div>
+                  <p className="tool-desc">{t.desc}</p>
+                </div>
+              </Reveal>
+            ))}
           </div>
-
-          <div className="flex flex-wrap gap-6 justify-center mt-2">
-            <a
-              href="https://github.com/okyashgajjar"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs text-charcoal hover:text-primary transition font-semibold"
-            >
-              <Github size={14} />
-              GitHub
-            </a>
-            <a
-              href="https://x.com/okyashgajjar"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs text-charcoal hover:text-primary transition font-semibold"
-            >
-              <Twitter size={14} />
-              X / Twitter
-            </a>
-            <a
-              href="https://huggingface.co/okyashgajjar"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs text-charcoal hover:text-primary transition font-semibold"
-            >
-              <span className="text-[10px] font-mono border border-charcoal/30 px-1 rounded">HF</span>
-              HuggingFace
-            </a>
-            <a
-              href="https://ko-fi.com/okyashgajjar"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs text-charcoal hover:text-primary transition font-semibold"
-            >
-              ☕ Ko-Fi
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* GitHub Stars CTA */}
-      <section className="bg-[#FAF9F6] border-t border-[#E5E5E0] py-16 px-6">
-        <div className="max-w-[700px] mx-auto text-center">
-          <h2 className="font-serif font-bold text-3xl text-charcoal mb-4">⭐ Support the Project</h2>
-          <p className="text-light text-sm max-w-[500px] mx-auto mb-8 leading-relaxed">
-            CostAffective is open-source (MIT). Star the repo on GitHub to help others discover local-first repository intelligence.
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <a
-              href="https://github.com/okyashgajjar/costaffective-mcp"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-action py-3 px-8 font-bold text-sm inline-flex items-center gap-2"
-            >
-              <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
-              </svg>
-              Star on GitHub
-            </a>
-            <a
-              href="https://github.com/okyashgajjar/costaffective-mcp/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-secondary py-3 px-8 font-bold text-sm"
-            >
-              Report Issue
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Bottom Call to Action */}
-      <section className="bg-charcoal text-white py-20 px-6 border-t border-[#E5E5E0]">
-        <div className="max-w-[800px] mx-auto text-center">
-          <h2 className="font-serif font-bold text-4xl mb-4 text-white">Save Context. Write Code.</h2>
-          <p className="text-gray-400 max-w-[600px] mx-auto mb-8 text-sm">
-            Install the local-first repository intelligence server now and enjoy sub-millisecond, token-efficient semantic retrievals.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <div className="install-block bg-neutral-900 border-neutral-800 text-white font-mono text-sm py-2 px-4 rounded-md">
-              <span className="text-blue-500 mr-2">$</span>
-              <span>npm install -g costaffective-mcp</span>
-            </div>
-            <Link href="/docs/install" className="btn btn-action py-2.5 px-6 font-bold">
-              View Guide
+          <div className="text-center mt-10">
+            <Link href="/tools" className="btn btn-secondary font-medium text-xs">
+              View full tool catalog with schemas
             </Link>
           </div>
         </div>
       </section>
+
+      {/* ========================== ARCHITECTURE ========================== */}
+      <section className="section-container" id="architecture">
+        <Reveal>
+          <div className="section-header">
+            <span className="eyebrow">System layout</span>
+            <h2 className="font-bold text-3xl mt-3">Architecture</h2>
+            <p className="section-desc">Hover or click components in the flow diagram to inspect each module.</p>
+          </div>
+        </Reveal>
+        <ArchitectureVisualizer />
+        <div className="text-center mt-8">
+          <Link href="/architecture" className="btn btn-secondary font-medium text-xs">
+            Deep-dive architecture documentation
+          </Link>
+        </div>
+      </section>
+
+      {/* ========================== AST SANDBOX ========================== */}
+      <section className="benefits-section">
+        <div className="section-container">
+          <Reveal>
+            <div className="section-header">
+              <span className="eyebrow">Static analysis</span>
+              <h2 className="font-bold text-3xl mt-3">How retrieval works</h2>
+              <p className="section-desc">
+                CostAffective indexes code structurally with Tree-sitter. Explore it live in the AST simulator.
+              </p>
+            </div>
+          </Reveal>
+          <ASTSandbox />
+        </div>
+      </section>
+
+      {/* ========================== CODEBASE INSPECTOR ========================== */}
+      <section className="section-container">
+        <Reveal>
+          <div className="section-header">
+            <span className="eyebrow">Module maps</span>
+            <h2 className="font-bold text-3xl mt-3">Codebase inspector</h2>
+            <p className="section-desc">Browse the actual CostAffective codebase to verify its structure.</p>
+          </div>
+        </Reveal>
+        <ModuleBrowser />
+      </section>
+
+      {/* ========================== CONFIGURATOR ========================== */}
+      <section className="benefits-section" id="configuration">
+        <div className="section-container">
+          <Reveal>
+            <div className="section-header">
+              <span className="eyebrow">Setup</span>
+              <h2 className="font-bold text-3xl mt-3">Editor configurator</h2>
+              <p className="section-desc">Select your IDE to generate a setup profile.</p>
+            </div>
+          </Reveal>
+          <Configurator />
+        </div>
+      </section>
+
+      {/* ========================== COMPARISONS ========================== */}
+      <section className="section-container">
+        <Reveal>
+          <div className="section-header">
+            <span className="eyebrow">Comparisons</span>
+            <h2 className="font-bold text-3xl mt-3">CostAffective vs alternatives</h2>
+            <p className="section-desc">How it compares to dependency graphs and plain text search.</p>
+          </div>
+        </Reveal>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          {[
+            { slug: 'codegraph', name: 'CodeGraph', desc: 'Saves 43.8% token context versus heavy code-graph pointer files.' },
+            { slug: 'serena', name: 'Serena', desc: 'Restores offline parsing without cloud data egress.' },
+            { slug: 'graphify', name: 'Graphify', desc: 'Optimized symbol arrays instead of complex spatial coordinates.' },
+            { slug: 'ripgrep', name: 'ripgrep', desc: 'Retrieves logical scopes rather than noisy text lines.' },
+          ].map((item, i) => (
+            <Reveal key={item.slug} delay={i * 0.05}>
+              <div className="benefit-card flex flex-col justify-between h-full">
+                <div>
+                  <h3 className="font-bold text-lg text-charcoal">{item.name}</h3>
+                  <p className="text-light text-xs mt-2 leading-relaxed">{item.desc}</p>
+                </div>
+                <div className="mt-6">
+                  <Link href={`/compare/${item.slug}`} className="link-anim text-xs">
+                    Read comparison
+                  </Link>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* ========================== FAQ TEASER ========================== */}
+      <section className="benefits-section">
+        <div className="section-container">
+          <Reveal>
+            <div className="section-header">
+              <span className="eyebrow">Questions</span>
+              <h2 className="font-bold text-3xl mt-3">Frequently asked</h2>
+              <p className="section-desc">Indexing, token optimization, and IDE integration.</p>
+            </div>
+          </Reveal>
+          <div className="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+            {[
+              {
+                q: 'How does it save prompt tokens?',
+                a: 'It returns structural declarations and scopes from a local index instead of whole files, and lets the model park large output out of context, trimming input by up to 45.9%.',
+              },
+              {
+                q: 'Does my code leave my machine?',
+                a: 'No. All parsing and SQLite index writes happen locally. There are no API keys and no cloud indexing.',
+              },
+              {
+                q: 'How is this different from grep or ripgrep?',
+                a: 'grep returns lines. CostAffective understands structure — it knows where a function body starts and ends, who calls it, and what it references. From a pre-built index, in microseconds.',
+              },
+              {
+                q: 'Does it work with any LLM provider?',
+                a: 'It works with any editor that supports MCP tools — Claude Code, Cursor, OpenCode, Codex CLI, and any stdio-based MCP client.',
+              },
+            ].map((item) => (
+              <div key={item.q} className="border-b pb-4">
+                <h3 className="font-bold text-lg text-charcoal mb-2">{item.q}</h3>
+                <p className="text-light text-sm leading-relaxed">{item.a}</p>
+              </div>
+            ))}
+          </div>
+          <div className="text-center mt-10">
+            <Link href="/faq" className="btn btn-secondary font-medium text-xs">
+              Browse all FAQs
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ========================== BOTTOM CTA ========================== */}
+      <section className="cta-section">
+        <div className="max-w-[800px] mx-auto text-center">
+          <Reveal y={20}>
+            <h2 className="cta-title">Save context. Write code.</h2>
+            <p className="cta-subtitle">
+              Install the local-first repository intelligence server and keep your AI coding sessions fast, private,
+              and token-efficient.
+            </p>
+            <div className="flex flex-col items-center gap-4">
+              <CopyCommand command={INSTALL_CMD} dark />
+              <div className="flex gap-3">
+                <Link href="/docs/install" className="btn btn-action py-2.5 px-6 font-bold">
+                  View Guide
+                </Link>
+                <a
+                  href="https://github.com/okyashgajjar/costaffective-mcp"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-secondary py-2.5 px-6 font-bold !text-white !border-white/20 hover:!bg-white/10 inline-flex items-center gap-2"
+                >
+                  <Github size={16} /> Star on GitHub
+                </a>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <Script src="https://platform.linkedin.com/badges/js/profile.js" strategy="afterInteractive" />
     </>
   );
 }
