@@ -6,7 +6,6 @@ const staticRoutes: { url: string; priority: number; changeFreq: 'weekly' | 'dai
   { url: '/', priority: 1.0, changeFreq: 'weekly' },
   { url: '/vision', priority: 0.9, changeFreq: 'monthly' },
   { url: '/architecture', priority: 0.8, changeFreq: 'monthly' },
-  { url: '/benchmarks', priority: 0.9, changeFreq: 'weekly' },
   { url: '/blog', priority: 0.7, changeFreq: 'weekly' },
   { url: '/faq', priority: 0.6, changeFreq: 'monthly' },
   { url: '/mcp', priority: 0.7, changeFreq: 'monthly' },

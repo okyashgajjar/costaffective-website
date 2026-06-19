@@ -3,7 +3,7 @@ import { Calendar, User, Clock, ArrowRight } from 'lucide-react';
 
 export const metadata = {
   title: 'Blog | CostAffective Context Research',
-  description: 'Explore our latest articles, case studies, and engineering benchmarks on repository intelligence and prompt context savings.',
+  description: 'Explore our latest articles, case studies, and research on repository intelligence and prompt context savings.',
 };
 
 export default function BlogIndex() {

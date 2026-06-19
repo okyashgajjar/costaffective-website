@@ -17,7 +17,7 @@ const SNIPPETS: Record<string, CodeSnippet> = {
   go: {
     name: 'installer.go',
     lang: 'go',
-    stats: { time: '8ms', tokens: '425', compression: '52.3%' },
+    stats: { time: '8ms', tokens: '425', compression: 'scoped' },
     declarations: ['SetupClient'],
     references: ['InjectConfig', 'fmt.Printf', 'fmt.Errorf'],
     lines: [
@@ -38,7 +38,7 @@ const SNIPPETS: Record<string, CodeSnippet> = {
   python: {
     name: 'parser.py',
     lang: 'python',
-    stats: { time: '12ms', tokens: '685', compression: '45.9%' },
+    stats: { time: '12ms', tokens: '685', compression: 'scoped' },
     declarations: ['Parser', 'parse_file'],
     references: ['tree_sitter', 'extract_symbols'],
     lines: [
@@ -56,7 +56,7 @@ const SNIPPETS: Record<string, CodeSnippet> = {
   typescript: {
     name: 'config.ts',
     lang: 'typescript',
-    stats: { time: '4ms', tokens: '204', compression: '61.2%' },
+    stats: { time: '4ms', tokens: '204', compression: 'scoped' },
     declarations: ['ServerSetting', 'loadConfig'],
     references: ['fs.readFileSync', 'path.resolve', 'JSON.parse'],
     lines: [

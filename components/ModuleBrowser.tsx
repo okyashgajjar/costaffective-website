@@ -35,7 +35,7 @@ const MODULES: Record<string, ModuleDetail> = {
   retriever: {
     path: 'internal/retriever',
     type: 'Semantic Search Engines',
-    desc: 'Implements the core 9 indexing algorithms (treesitter, grep, fts, auto, naive) used to measure benchmark scores.',
+    desc: 'Implements the core 9 indexing algorithms (treesitter, grep, fts, auto, naive) for semantic code retrieval.',
     filesCount: 11,
     symbols: [
       { name: 'type Retriever interface', type: 'struct' },

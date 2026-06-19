@@ -34,7 +34,7 @@ const BASE_URL = 'https://costaffective-mcp.vercel.app';
 const SITE_NAME = 'CostAffective-MCP';
 const DEFAULT_TITLE = 'CostAffective-MCP | Local MCP Server That Cuts AI Coding Token & Cache Cost';
 const DEFAULT_DESCRIPTION =
-  'CostAffective is a local-first MCP server for AI coding assistants. It answers code questions from a Tree-sitter index, keeps large content out of the context window with stash and recall, and cuts prompt-cache cost in long sessions. The result is 45.9% fewer tokens and 100% local execution.';
+  'CostAffective is a local-first MCP server for AI coding assistants. It answers code questions from a Tree-sitter index, keeps large content out of the context window with stash and recall, and cuts prompt-cache cost in long sessions. Everything runs locally — no data ever leaves your machine.';
 
 export const metadata: Metadata = {
   title: {
@@ -127,7 +127,7 @@ const jsonLd = {
       '@id': `${BASE_URL}/#website`,
       url: BASE_URL,
       name: 'CostAffective-MCP',
-      description: 'Reduce repository exploration costs, shrink context windows by up to 45.9%.',
+      description: 'Reduce repository exploration costs and shrink context windows with a local-first MCP server.',
       publisher: { '@id': `${BASE_URL}/#organization` },
       inLanguage: 'en-US',
     },
@@ -160,7 +160,6 @@ const jsonLd = {
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Home', item: BASE_URL },
         { '@type': 'ListItem', position: 2, name: 'Vision', item: `${BASE_URL}/vision` },
-        { '@type': 'ListItem', position: 3, name: 'Benchmarks', item: `${BASE_URL}/benchmarks` },
         { '@type': 'ListItem', position: 4, name: 'Tools', item: `${BASE_URL}/tools` },
         { '@type': 'ListItem', position: 5, name: 'Documentation', item: `${BASE_URL}/docs/install` },
       ],

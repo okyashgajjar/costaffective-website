@@ -17,7 +17,7 @@ export default function UseCases() {
   const list = [
     {
       title: 'AI Coding Agents',
-      desc: 'Coding agents often query wide scopes, loading massive file volumes into prompt context. CostAffective intercepts calls, statically locates exact symbol references, and returns only logical bounds, saving up to 45.9% in token expenses.',
+      desc: 'Coding agents often query wide scopes, loading massive file volumes into prompt context. CostAffective intercepts calls, statically locates exact symbol references, and returns only logical bounds, saving substantially on token expenses.',
       icon: <Layers className="text-blue-600" />
     },
     {

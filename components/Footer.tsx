@@ -14,7 +14,6 @@ export default function Footer() {
           <div className="link-group">
             <h5>Product</h5>
             <Link href="/vision">Vision</Link>
-            <Link href="/benchmarks">Benchmarks</Link>
             <Link href="/architecture">Architecture</Link>
             <Link href="/tools">MCP Tools</Link>
             <Link href="/mcp">MCP Specs</Link>

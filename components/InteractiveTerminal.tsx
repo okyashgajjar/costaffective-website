@@ -14,7 +14,7 @@ const LOG_LINES = [
   { text: '>> [retriever] Incoming tool call: find_symbol { "symbol": "GetAST" }', type: 't-cyan' },
   { text: '>> [db] Index search complete: 1 match found in sqlite_master. 41us.', type: 't-grey' },
   { text: '>> [retriever] Context budget: 1000 tokens. Relational context resolved.', type: 't-grey' },
-  { text: '>> [retriever] Response payload compressed: 685 tokens sent. Saved 45.9%.', type: 't-green' },
+  { text: '>> [retriever] Response payload compressed: 685 tokens sent. Scoped to relevant symbols.', type: 't-green' },
 ];
 
 export default function InteractiveTerminal() {
@@ -90,7 +90,7 @@ export default function InteractiveTerminal() {
         <div className="stats-card-line">
           <div className="terminal-stat text-white">
             <span className="stat-lbl">Savings Rate</span>
-            <span className="stat-val text-green-400 font-bold">45.9%</span>
+            <span className="stat-val text-green-400 font-bold">Active</span>
           </div>
           <div className="terminal-stat text-white">
             <span className="stat-lbl">Index Sync</span>

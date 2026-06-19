@@ -96,9 +96,6 @@ export default function Home() {
         <Reveal>
           <div className="stat-strip">
             {[
-              { num: '45.9%', lbl: 'Fewer tokens', sub: 'vs CodeGraph on Continue OSS' },
-              { num: '54.3%', lbl: 'Fewer exploration loops', sub: '43 vs 94 agent callbacks' },
-              { num: '81.7%', lbl: 'Fewer tokens (small repo)', sub: '299K → 55K in one session' },
               { num: '100%', lbl: 'Local-first', sub: 'No data ever leaves your machine' },
             ].map((s) => (
               <div key={s.lbl} className="stat-cell">
@@ -111,111 +108,6 @@ export default function Home() {
         </Reveal>
       </section>
 
-      {/* ========================== COMBINED BENCHMARKS ========================== */}
-      <section className="benefits-section" id="benchmarks">
-        <div className="section-container">
-          <Reveal>
-            <div className="section-header">
-              <span className="eyebrow">Measured results</span>
-              <h2 className="font-bold text-3xl mt-3">Fewer tokens. Fewer calls. Faster sessions.</h2>
-              <p className="section-desc">
-                Same model. Same task. Same output quality. The difference is index-backed tools and context control.
-              </p>
-            </div>
-          </Reveal>
-
-          <div className="benchmark-grid">
-            {/* Small repo */}
-            <Reveal delay={0.05}>
-              <div className="benchmark-card">
-                <div className="benchmark-header">
-                  <div className="flex items-center gap-2">
-                    <Terminal size={16} className="text-primary" />
-                    <span className="font-bold text-sm">Small repository</span>
-                  </div>
-                  <span className="benchmark-badge">81.7% saved</span>
-                </div>
-                <table className="benchmark-table">
-                  <thead>
-                    <tr>
-                      <th>Metric</th>
-                      <th>Without</th>
-                      <th>With</th>
-                      <th>Change</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr className="highlight">
-                      <td>Tokens consumed</td>
-                      <td className="old">299,300</td>
-                      <td className="new">54,745</td>
-                      <td className="winner">81.7% fewer</td>
-                    </tr>
-                    <tr>
-                      <td>Wall time</td>
-                      <td className="old">14.6s</td>
-                      <td className="new">6.7s</td>
-                      <td className="winner">2.2x faster</td>
-                    </tr>
-                    <tr>
-                      <td>Tool calls</td>
-                      <td className="old">10</td>
-                      <td className="new">3</td>
-                      <td className="winner">70% fewer</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </Reveal>
-
-            {/* Large repo */}
-            <Reveal delay={0.1}>
-              <div className="benchmark-card">
-                <div className="benchmark-header">
-                  <div className="flex items-center gap-2">
-                    <Database size={16} className="text-primary" />
-                    <span className="font-bold text-sm">Continue OSS (3,203 files)</span>
-                  </div>
-                  <span className="benchmark-badge">45.9% saved</span>
-                </div>
-                <table className="benchmark-table">
-                  <thead>
-                    <tr>
-                      <th>Metric</th>
-                      <th>CostAffective</th>
-                      <th>CodeGraph</th>
-                      <th>Winner</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {[
-                      { metric: 'Total Tokens', a: '4,708,835', b: '8,707,328', w: 'CostAffective' },
-                      { metric: 'Exploration Loops', a: '43', b: '94', w: 'CostAffective' },
-                      { metric: 'API Calls', a: '89', b: '134', w: 'CostAffective' },
-                      { metric: 'Deliverables', a: '4', b: '4', w: 'Tie' },
-                    ].map((row) => (
-                      <tr key={row.metric} className={row.metric === 'Total Tokens' ? 'highlight' : ''}>
-                        <td>{row.metric}</td>
-                        <td className="new">{row.a}</td>
-                        <td className="old">{row.b}</td>
-                        <td className="winner">{row.w}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </Reveal>
-          </div>
-
-          <Reveal delay={0.15}>
-            <div className="text-center mt-8">
-              <Link href="/benchmarks" className="btn btn-action font-mono text-xs inline-flex items-center gap-1">
-                View full benchmark suite <ArrowRight size={13} />
-              </Link>
-            </div>
-          </Reveal>
-        </div>
-      </section>
 
       {/* ========================== PROOF ========================== */}
       <section className="section-container" id="proof">
@@ -234,7 +126,7 @@ export default function Home() {
             <div className="proof-card">
               <div className="proof-label">
                 <span className="proof-badge bad">Without</span>
-                <span>10 tool calls · 14.6s · 299K tokens</span>
+                <span>Naive file reads — no index</span>
               </div>
               <a
                 href="https://raw.githubusercontent.com/okyashgajjar/costaffective-mcp/main/proofs/without-mcp-smallrepo-opencode.png"
@@ -264,7 +156,7 @@ export default function Home() {
             <div className="proof-card">
               <div className="proof-label">
                 <span className="proof-badge good">With</span>
-                <span>3 tool calls · 6.7s · 55K tokens</span>
+                <span>Index-backed tool calls</span>
               </div>
               <a
                 href="https://raw.githubusercontent.com/okyashgajjar/costaffective-mcp/main/proofs/with-mcp-smallrepo-opencode.png"
@@ -315,12 +207,12 @@ export default function Home() {
               {
                 title: 'Context grows without being useful',
                 body: 'A typical session starts small. Then the model dumps a file to answer a question. Then a test output. Then a build log. None of these leave — they accumulate in the resident context window.',
-                stat: '455K tokens cached per turn in measured sessions',
+                stat: 'Accumulated context persists across turns, driving up costs',
               },
               {
                 title: 'The prompt cache makes it worse',
                 body: 'Every turn pays to read the entire resident context. Any change or idle gap forces a full rewrite. In one measured call, $2.84 of a $2.95 charge was the cache write — the output was under 4K tokens.',
-                stat: '$2.84 cache write vs $0.11 output in a real call',
+                stat: 'Cache writes dominate API cost vs actual output',
               },
             ].map((item, i) => (
               <Reveal key={item.title} delay={i * 0.06}>
@@ -567,7 +459,7 @@ export default function Home() {
         </Reveal>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {[
-            { slug: 'codegraph', name: 'CodeGraph', desc: 'Saves 43.8% token context versus heavy code-graph pointer files.' },
+            { slug: 'codegraph', name: 'CodeGraph', desc: 'Scoped AST lookups instead of heavy code-graph pointer files.' },
             { slug: 'serena', name: 'Serena', desc: 'Restores offline parsing without cloud data egress.' },
             { slug: 'graphify', name: 'Graphify', desc: 'Optimized symbol arrays instead of complex spatial coordinates.' },
             { slug: 'ripgrep', name: 'ripgrep', desc: 'Retrieves logical scopes rather than noisy text lines.' },
@@ -603,7 +495,7 @@ export default function Home() {
             {[
               {
                 q: 'How does it save prompt tokens?',
-                a: 'It returns structural declarations and scopes from a local index instead of whole files, and lets the model park large output out of context, trimming input by up to 45.9%.',
+                a: 'It returns structural declarations and scopes from a local index instead of whole files, and lets the model park large output out of context, trimming input significantly.',
               },
               {
                 q: 'Does my code leave my machine?',

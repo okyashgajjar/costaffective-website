@@ -140,22 +140,6 @@ export default async function ComparePage({ params }: PageProps) {
           </div>
         </div>
 
-        {/* Benchmarks Section */}
-        <div className="bg-[#FAF9F6] border border-[#E5E5E0] rounded-lg p-8 mb-12">
-          <h3 className="font-serif font-bold text-xl text-charcoal mb-4">Quality & Token Savings Metrics</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {data.benchmarks.map((b, idx) => (
-              <div key={idx} className="bg-white border border-[#E5E5E0] p-5 rounded shadow-sm">
-                <span className="text-grey text-[10px] uppercase font-bold block mb-1">{b.metric}</span>
-                <div className="flex items-baseline justify-between mt-2">
-                  <span className="text-charcoal font-bold text-lg">{b.costAffective}</span>
-                  <span className="text-xs text-grey">vs {b.competitor}</span>
-                </div>
-                <div className="text-xs text-green-600 font-semibold mt-2">{b.improvement}</div>
-              </div>
-            ))}
-          </div>
-        </div>
 
         {/* Architectural Comparison */}
         <div className="mb-12 border-t border-[#E5E5E0] pt-12">

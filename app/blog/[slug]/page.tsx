@@ -54,7 +54,7 @@ func (m *Manager) GetSession(id string) (*Session, error) {
       <h3>Key Architectural Gains</h3>
       <ul>
         <li><strong>Grammar-Aware Filtering:</strong> Separates functions, methods, struct interfaces, and variables.</li>
-        <li><strong>Reduced Context Payload:</strong> Drops unrelated comments, imports, and utility functions, compressing inputs by up to 82%.</li>
+        <li><strong>Reduced Context Payload:</strong> Drops unrelated comments, imports, and utility functions, sending only the relevant declaration and reference scopes.</li>
         <li><strong>Deterministic Lookups:</strong> Ensures agents find definition ranges instantly, bypassing fuzzy text-matching issues.</li>
       </ul>
     `

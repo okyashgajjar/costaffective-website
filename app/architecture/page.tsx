@@ -105,7 +105,7 @@ export default function Architecture() {
               {/* Box 5: Compress */}
               <rect x="610" y="50" width="140" height="60" rx="4" fill="#7000FF" fillOpacity="0.05" stroke="#7000FF" strokeWidth="1.5" />
               <text x="680" y="80" textAnchor="middle" fontFamily="var(--font-sans)" fontSize="11" fontWeight="600" fill="#7000FF">5. Context Sent</text>
-              <text x="680" y="94" textAnchor="middle" fontFamily="var(--font-mono)" fontSize="8" fill="#7000FF">compressed (saved 45%)</text>
+              <text x="680" y="94" textAnchor="middle" fontFamily="var(--font-mono)" fontSize="8" fill="#7000FF">scoped context sent</text>
             </svg>
           </div>
         </div>

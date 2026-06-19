@@ -197,8 +197,8 @@ export default function VisionPage() {
             <p>
               The same philosophy runs end to end: answer from the index, budget the summaries, stash the large stuff,
               recall only the slice, remember the conclusions, and make the editor do it by default. On the Continue OSS
-              repository this adds up to 45.9% fewer tokens, 54.3% fewer exploration loops, and 42.1% fewer tool
-              interactions, entirely local.
+              repository this adds up to fewer tokens burned on redundant context, fewer exploration loops, and fewer
+              tool interactions, entirely local.
             </p>
           </Reveal>
 
@@ -209,9 +209,6 @@ export default function VisionPage() {
               </Link>
               <Link href="/tools" className="btn btn-secondary inline-flex items-center gap-1">
                 See the tools <ArrowRight size={14} />
-              </Link>
-              <Link href="/benchmarks" className="btn btn-secondary">
-                View benchmarks
               </Link>
             </div>
           </Reveal>

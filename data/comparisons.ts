@@ -12,12 +12,6 @@ export interface ComparisonData {
   }[];
   strengths: string[];
   weaknesses: string[];
-  benchmarks: {
-    metric: string;
-    costAffective: string;
-    competitor: string;
-    improvement: string;
-  }[];
   architecture: {
     costAffective: string;
     competitor: string;
@@ -36,11 +30,11 @@ export const comparisonsData: Record<string, ComparisonData> = {
     name: 'CodeGraph',
     headline: 'CostAffective vs CodeGraph',
     tagline: 'Why local AST compression outperforms heavy index graphs.',
-    description: 'CodeGraph constructs massive neo4j-like dependency networks in local memories, incurring massive indexing overheads and context bloating. CostAffective utilizes incremental AST scope trees to compress token payloads by up to 45.9%.',
+    description: 'CodeGraph constructs massive neo4j-like dependency networks in local memories, incurring massive indexing overheads and context bloating. CostAffective utilizes incremental AST scope trees to send only relevant declaration scopes instead of raw file contents.',
     features: [
       { feature: 'Local AST Scope Extraction', costAffective: 'Yes (Tree-sitter)', competitor: 'Yes (Regex-based)', status: 'yes' },
       { feature: 'Incremental Index updates', costAffective: 'Yes (Watchdog 8ms)', competitor: 'No (Full re-parse)', status: 'yes' },
-      { feature: 'Token Context Compression', costAffective: 'Yes (45.9% reduction)', competitor: 'No (Sends full graph nodes)', status: 'yes' },
+      { feature: 'Token Context Compression', costAffective: 'Yes (scoped AST)', competitor: 'No (Sends full graph nodes)', status: 'yes' },
       { feature: 'Sub-second Indexing', costAffective: 'Yes', competitor: 'No (Heavy JVM process)', status: 'yes' }
     ],
     strengths: [
@@ -52,11 +46,6 @@ export const comparisonsData: Record<string, ComparisonData> = {
       'Heavy heap allocation on large codebases.',
       'Requires full re-indexing when structure schema upgrades.',
       'No cloud sync options (100% local only).'
-    ],
-    benchmarks: [
-      { metric: 'Avg Token Cost', costAffective: '685 tokens', competitor: '1,219 tokens', improvement: '▼ 43.8%' },
-      { metric: 'Exploration Calls', costAffective: '43 calls', competitor: '112 calls', improvement: '▼ 61.6%' },
-      { metric: 'Indexing Memory', costAffective: '14MB', competitor: '820MB', improvement: '▼ 98.2%' }
     ],
     architecture: {
       costAffective: 'A decentralized, standard SQLite key-value mapping file hashes to AST coordinates.',
@@ -94,11 +83,6 @@ export const comparisonsData: Record<string, ComparisonData> = {
       'Cannot share indexes across multiple developer machines.',
       'Indexing speed depends entirely on local CPU performance.'
     ],
-    benchmarks: [
-      { metric: 'Data Egress', costAffective: '0 bytes', competitor: '4.2MB / commit', improvement: '100% Saved' },
-      { metric: 'Query Latency', costAffective: '120ms', competitor: '412ms', improvement: '▼ 70.8%' },
-      { metric: 'Monthly Fees', costAffective: '$0.00', competitor: '$24.00 / seat', improvement: '100% Saved' }
-    ],
     architecture: {
       costAffective: 'Decentralized local CLI binaries compiling index databases on-save.',
       competitor: 'Client-server SaaS architecture shipping code chunks to cloud parsing clusters.',
@@ -120,7 +104,7 @@ export const comparisonsData: Record<string, ComparisonData> = {
     tagline: 'Pragmatic symbol tables vs dense visual graphs.',
     description: 'Graphify converts codebases into complex spatial coordinate trees. While visually appealing, spatial nodes are highly inefficient for coding agents. CostAffective utilizes standard relational symbol maps optimized for direct scope retrievals.',
     features: [
-      { feature: 'Token Economy Mapping', costAffective: 'Yes (45.9% compressed)', competitor: 'No (Sends coordinate meshes)', status: 'yes' },
+      { feature: 'Token Economy Mapping', costAffective: 'Yes (scoped AST)', competitor: 'No (Sends coordinate meshes)', status: 'yes' },
       { feature: 'Fuzzy Symbol Lookup', costAffective: 'Yes', competitor: 'Yes', status: 'yes' },
       { feature: 'Incremental Rebuilds', costAffective: 'Yes (8ms)', competitor: 'No (Slow graph regenerations)', status: 'yes' }
     ],
@@ -131,10 +115,6 @@ export const comparisonsData: Record<string, ComparisonData> = {
     weaknesses: [
       'No visual graph display rendering frontend tabs.',
       'Maintains strict Go language dependencies.'
-    ],
-    benchmarks: [
-      { metric: 'Context Size', costAffective: '685 tokens', competitor: '1,704 tokens', improvement: '▼ 59.8%' },
-      { metric: 'Setup Latency', costAffective: '2 seconds', competitor: '4 minutes', improvement: '▼ 99.1%' }
     ],
     architecture: {
       costAffective: 'SQLite database with symbol, caller, and reference scopes.',
@@ -168,10 +148,6 @@ export const comparisonsData: Record<string, ComparisonData> = {
     ],
     weaknesses: [
       'Takes 2 seconds to initialize index database on first startup.'
-    ],
-    benchmarks: [
-      { metric: 'Noise Reduction', costAffective: '92% less lines', competitor: '0% (Sends raw matches)', improvement: '▲ 92%' },
-      { metric: 'Context Cost', costAffective: '685 tokens', competitor: '2,640 tokens', improvement: '▼ 74%' }
     ],
     architecture: {
       costAffective: 'Indexes parsed symbols using AST nodes to identify declarations.',

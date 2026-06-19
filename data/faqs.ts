@@ -15,7 +15,7 @@ export const faqsData: FAQItem[] = [
   {
     id: 'why-not-codegraph',
     question: 'Why not use CodeGraph?',
-    answer: 'CodeGraph builds heavy, memory-resident dependency graphs that can bloat context sizes and consume massive RAM. CostAffective uses a lightweight SQLite index and returns compressed, symbol-level AST contexts, lowering daily prompt token usage by 45.9% compared to traditional code graphs.',
+    answer: 'CodeGraph builds heavy, memory-resident dependency graphs that can bloat context sizes and consume massive RAM. CostAffective uses a lightweight SQLite index and returns compressed, symbol-level AST contexts instead of raw file contents.',
     category: 'core'
   },
   {
@@ -27,7 +27,7 @@ export const faqsData: FAQItem[] = [
   {
     id: 'context-savings',
     question: 'How much context can CostAffective save?',
-    answer: 'In global leaderboard evaluations, CostAffective reduced token consumption by 45.9%, exploration loops by 54.3%, and tool interaction latency by 88% compared to standard naive context retrievals.',
+    answer: 'CostAffective reduces unnecessary context accumulation by answering from a local index, budgeting summaries, and moving large output out of the context window with stash and recall. This keeps every turn\'s context smaller than naive file-reading approaches.',
     category: 'performance'
   },
   {
@@ -201,7 +201,7 @@ export const faqsData: FAQItem[] = [
   {
     id: 'why-buy-coffee',
     question: 'What is "Save tokens. Buy Coffee"?',
-    answer: 'It is a reminder that prompt tokens are expensive. By saving 45.9% on prompt contexts, developers can convert their cloud spending into real coffee.',
+    answer: 'It is a reminder that prompt tokens are expensive and caching them across long sessions adds up fast. By keeping the context window lean, developers can reduce their cloud spending.',
     category: 'core'
   }
 ];
