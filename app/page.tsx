@@ -13,13 +13,24 @@ import Configurator from '@/components/Configurator';
 import Reveal from '@/components/Reveal';
 import CopyCommand from '@/components/CopyCommand';
 
-const INSTALL_CMD = 'curl -fsSL https://raw.githubusercontent.com/okyashgajjar/costaffective-mcp/main/install.sh | bash';
+const INSTALL_CMD = 'curl -fsSL https://raw.githubusercontent.com/okyashgajjar/costwise-mcp/main/install.sh | bash';
+
+export const metadata = {
+  title: 'CostWise-MCP — Open-Source MCP Server for AI Coding Agents | Yash Gajjar',
+  description:
+    'CostWise is the #1 open-source MCP server built by Yash Gajjar. Slash AI coding token & prompt-cache cost with 11 MCP tools: Tree-sitter retrieval, stash/recall context control, and token-budgeted summaries. Works with Claude Code, Cursor, Codex CLI & OpenCode. 100% local.',
+  openGraph: {
+    title: 'CostWise-MCP — Open-Source MCP Server for AI Coding Agents',
+    description:
+      'Slash AI coding token costs with 11 open-source MCP tools. Tree-sitter retrieval, stash_context/recall, and token-budgeted summaries. Built by Yash Gajjar.',
+  },
+};
 
 export default function Home() {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
-    name: 'CostAffective-MCP',
+    name: 'CostWise-MCP',
     applicationCategory: 'DeveloperApplication',
     operatingSystem: 'Linux, macOS, Windows',
     offers: { '@type': 'Offer', price: '0.00', priceCurrency: 'USD' },
@@ -53,7 +64,7 @@ export default function Home() {
             <Reveal y={20} delay={0.1}>
               <p className="hero-subtitle">
                 An experienced engineer does not re-read the same files every turn, rediscover the same symbols,
-                or carry a 5,000-line log in memory. CostAffective gives your AI coding agent the same instincts —
+                or carry a 5,000-line log in memory. CostWise gives your AI coding agent the same instincts —
                 from a local index, not from file dumps.
               </p>
             </Reveal>
@@ -114,7 +125,7 @@ export default function Home() {
         <Reveal>
           <div className="section-header">
             <span className="eyebrow">See it in action</span>
-            <h2 className="font-bold text-3xl mt-3">Without CostAffective vs with</h2>
+            <h2 className="font-bold text-3xl mt-3">Without CostWise vs with</h2>
             <p className="section-desc">
               Same task. Same model. The left side reads files. The right side uses the index.
             </p>
@@ -129,20 +140,20 @@ export default function Home() {
                 <span>Naive file reads — no index</span>
               </div>
               <a
-                href="https://raw.githubusercontent.com/okyashgajjar/costaffective-mcp/main/proofs/without-mcp-smallrepo-opencode.png"
+                href="https://raw.githubusercontent.com/okyashgajjar/costwise-mcp/main/proofs/without-mcp-smallrepo-opencode.png"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="proof-image-link"
               >
                 <img
-                  src="https://raw.githubusercontent.com/okyashgajjar/costaffective-mcp/main/proofs/without-mcp-smallrepo-opencode.png"
-                  alt="OpenCode without CostAffective — many tool calls, high token count"
+                  src="https://raw.githubusercontent.com/okyashgajjar/costwise-mcp/main/proofs/without-mcp-smallrepo-opencode.png"
+                  alt="OpenCode without CostWise — many tool calls, high token count"
                   className="proof-image"
                   loading="lazy"
                 />
               </a>
               <a
-                href="https://raw.githubusercontent.com/okyashgajjar/costaffective-mcp/main/proofs/opencode-without-costaffective.webm"
+                href="https://raw.githubusercontent.com/okyashgajjar/costwise-mcp/main/proofs/opencode-without-costwise.webm"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="proof-video-link"
@@ -159,20 +170,20 @@ export default function Home() {
                 <span>Index-backed tool calls</span>
               </div>
               <a
-                href="https://raw.githubusercontent.com/okyashgajjar/costaffective-mcp/main/proofs/with-mcp-smallrepo-opencode.png"
+                href="https://raw.githubusercontent.com/okyashgajjar/costwise-mcp/main/proofs/with-mcp-smallrepo-opencode.png"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="proof-image-link"
               >
                 <img
-                  src="https://raw.githubusercontent.com/okyashgajjar/costaffective-mcp/main/proofs/with-mcp-smallrepo-opencode.png"
-                  alt="OpenCode with CostAffective — minimal tool calls, low token count"
+                  src="https://raw.githubusercontent.com/okyashgajjar/costwise-mcp/main/proofs/with-mcp-smallrepo-opencode.png"
+                  alt="OpenCode with CostWise — minimal tool calls, low token count"
                   className="proof-image"
                   loading="lazy"
                 />
               </a>
               <a
-                href="https://raw.githubusercontent.com/okyashgajjar/costaffective-mcp/main/proofs/opencode-with-costaffective.webm"
+                href="https://raw.githubusercontent.com/okyashgajjar/costwise-mcp/main/proofs/opencode-with-costwise.webm"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="proof-video-link"
@@ -239,7 +250,7 @@ export default function Home() {
       <section className="section-container">
         <Reveal>
           <div className="section-header">
-            <span className="eyebrow">How CostAffective fixes it</span>
+            <span className="eyebrow">How CostWise fixes it</span>
             <h2 className="font-bold text-3xl mt-3">One lever: shrink the context window</h2>
             <p className="section-desc">
               A server cannot control how the client caches. It can only control how many tokens ever enter the window.
@@ -338,7 +349,7 @@ export default function Home() {
         </div>
         <Reveal>
           <p className="text-center text-light text-sm mt-8 max-w-2xl mx-auto">
-            The <strong className="text-charcoal">costaffective-session</strong> skill teaches your editor to do this
+            The <strong className="text-charcoal">costwise-session</strong> skill teaches your editor to do this
             automatically, delivered to every MCP client through the protocol&apos;s instructions field.
           </p>
         </Reveal>
@@ -350,7 +361,7 @@ export default function Home() {
           <Reveal>
             <div className="section-header">
               <span className="eyebrow">The toolset</span>
-              <h2 className="font-bold text-3xl mt-3">Nine tools, one goal</h2>
+              <h2 className="font-bold text-3xl mt-3">Eleven tools, one goal</h2>
               <p className="section-desc">
                 Retrieval answers questions in a few tokens. Context-control keeps large content and durable facts
                 out of the window entirely.
@@ -369,6 +380,7 @@ export default function Home() {
               { name: 'remember', tag: 'context', desc: 'Persist a durable fact per repository so it is never repeated inline.' },
               { name: 'stash_context', tag: 'context', desc: 'Park a large blob out of context; get back a tiny handle. Lossless.' },
               { name: 'recall', tag: 'context', desc: 'Pull back only the slice a query needs, from a stash or from facts.' },
+              { name: 'session_brief', tag: 'context', desc: 'Compact summary of past sessions — facts, stashes, reindex events.' },
             ].map((t, i) => (
               <Reveal key={t.name} delay={(i % 3) * 0.05} as="div">
                 <div className="tool-card h-full">
@@ -414,7 +426,7 @@ export default function Home() {
               <span className="eyebrow">Static analysis</span>
               <h2 className="font-bold text-3xl mt-3">How retrieval works</h2>
               <p className="section-desc">
-                CostAffective indexes code structurally with Tree-sitter. Explore it live in the AST simulator.
+                CostWise indexes code structurally with Tree-sitter. Explore it live in the AST simulator.
               </p>
             </div>
           </Reveal>
@@ -428,7 +440,7 @@ export default function Home() {
           <div className="section-header">
             <span className="eyebrow">Module maps</span>
             <h2 className="font-bold text-3xl mt-3">Codebase inspector</h2>
-            <p className="section-desc">Browse the actual CostAffective codebase to verify its structure.</p>
+            <p className="section-desc">Browse the actual CostWise codebase to verify its structure.</p>
           </div>
         </Reveal>
         <ModuleBrowser />
@@ -453,7 +465,7 @@ export default function Home() {
         <Reveal>
           <div className="section-header">
             <span className="eyebrow">Comparisons</span>
-            <h2 className="font-bold text-3xl mt-3">CostAffective vs alternatives</h2>
+            <h2 className="font-bold text-3xl mt-3">CostWise vs alternatives</h2>
             <p className="section-desc">How it compares to dependency graphs and plain text search.</p>
           </div>
         </Reveal>
@@ -503,7 +515,7 @@ export default function Home() {
               },
               {
                 q: 'How is this different from grep or ripgrep?',
-                a: 'grep returns lines. CostAffective understands structure — it knows where a function body starts and ends, who calls it, and what it references. From a pre-built index, in microseconds.',
+                a: 'grep returns lines. CostWise understands structure — it knows where a function body starts and ends, who calls it, and what it references. From a pre-built index, in microseconds.',
               },
               {
                 q: 'Does it work with any LLM provider?',
@@ -540,7 +552,7 @@ export default function Home() {
                   View Guide
                 </Link>
                 <a
-                  href="https://github.com/okyashgajjar/costaffective-mcp"
+                  href="https://github.com/okyashgajjar/costwise-mcp"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-secondary py-2.5 px-6 font-bold !text-white !border-white/20 hover:!bg-white/10 inline-flex items-center gap-2"

@@ -2,26 +2,26 @@ import Link from 'next/link';
 import { Calendar, User, Clock, ArrowRight } from 'lucide-react';
 
 export const metadata = {
-  title: 'Blog | CostAffective Context Research',
-  description: 'Explore our latest articles, case studies, and research on repository intelligence and prompt context savings.',
+  title: 'Blog — MCP Server Research & AI Coding Agent Optimization | Yash Gajjar',
+  description: 'Technical deep-dives on MCP server development, Tree-sitter AST parsing, SQLite retrieval pipelines, and context window optimization for AI coding agents. By Yash Gajjar.',
 };
 
 export default function BlogIndex() {
   const blogListLd = {
     '@context': 'https://schema.org',
     '@type': 'Blog',
-    'name': 'CostAffective Context Research Blog',
-    'description': 'Latest developer updates and engineering articles from the CostAffective contributors.'
+    'name': 'CostWise Context Research Blog',
+    'description': 'Latest developer updates and engineering articles from the CostWise contributors.'
   };
 
   const list = [
     {
       slug: 'context-compression-and-ast-parsing',
-      title: 'Deep Dive into CostAffective: Context Compression & AST Parsing',
+      title: 'Deep Dive into CostWise: Context Compression & AST Parsing',
       date: 'June 10, 2026',
       author: 'okyashgajjar [Yash Gajjar]',
       readTime: '8 min read',
-      summary: 'How CostAffective leverages tree-sitter to parse source files into concrete syntax trees, extracting local scopes and definitions to trim prompt payloads.'
+      summary: 'How CostWise leverages tree-sitter to parse source files into concrete syntax trees, extracting local scopes and definitions to trim prompt payloads.'
     },
     {
       slug: 'sqlite-codebase-query-pipelines',
@@ -29,7 +29,7 @@ export default function BlogIndex() {
       date: 'June 08, 2026',
       author: 'okyashgajjar [Yash Gajjar]',
       readTime: '7 min read',
-      summary: 'Understanding how CostAffective organizes codebase entities (symbols, references, calls) into lightweight SQLite relational database schemas.'
+      summary: 'Understanding how CostWise organizes codebase entities (symbols, references, calls) into lightweight SQLite relational database schemas.'
     },
     {
       slug: 'mcp-transport-handshake-details',
@@ -37,7 +37,7 @@ export default function BlogIndex() {
       date: 'June 06, 2026',
       author: 'okyashgajjar [Yash Gajjar]',
       readTime: '6 min read',
-      summary: 'A comprehensive technical breakdown of how CostAffective handles stdio-based JSON-RPC handshakes to interface with Claude Code and Cursor.'
+      summary: 'A comprehensive technical breakdown of how CostWise handles stdio-based JSON-RPC handshakes to interface with Claude Code and Cursor.'
     }
   ];
 
@@ -54,7 +54,7 @@ export default function BlogIndex() {
           <span className="section-pill">Engineering</span>
           <h1 className="font-serif font-bold text-4xl text-charcoal mb-4">Context Research Blog</h1>
           <p className="text-light text-base max-w-[600px] leading-relaxed">
-            Latest insights, technical write-ups, and compiler tutorials from the CostAffective creator.
+            Latest insights, technical write-ups, and compiler tutorials from the CostWise creator.
           </p>
         </div>
 

@@ -23,21 +23,21 @@ interface ArticleDetail {
 const ARTICLES: Record<string, ArticleDetail> = {
   'context-compression-and-ast-parsing': {
     slug: 'context-compression-and-ast-parsing',
-    title: 'Deep Dive into CostAffective: Context Compression & AST Parsing',
+    title: 'Deep Dive into CostWise: Context Compression & AST Parsing',
     date: 'June 10, 2026',
     author: 'okyashgajjar [Yash Gajjar]',
     readTime: '8 min read',
-    summary: 'How CostAffective leverages tree-sitter to parse source files into concrete syntax trees, extracting local scopes and definitions to trim prompt payloads.',
+    summary: 'How CostWise leverages tree-sitter to parse source files into concrete syntax trees, extracting local scopes and definitions to trim prompt payloads.',
     contentHtml: `
       <p>Modern AI coding agents face a major performance bottleneck: <strong>context window bloat</strong>. When an agent explores a repository to answer questions or write code, it routinely reads full files containing thousands of lines of code. This behavior wastes tokens, degrades model attention, and increases latency.</p>
       
       <h3>The Mechanics of Static AST Parsing</h3>
-      <p>CostAffective-MCP resolves this by applying compiler-level static analysis directly within your workspace. Using tree-sitter, the server builds a concrete syntax tree (CST) for every source file. Instead of looking at code as unstructured text, CostAffective analyzes its grammar.</p>
+      <p>CostWise-MCP resolves this by applying compiler-level static analysis directly within your workspace. Using tree-sitter, the server builds a concrete syntax tree (CST) for every source file. Instead of looking at code as unstructured text, CostWise analyzes its grammar.</p>
       
       <p>When a coding agent queries a symbol definition, the server maps the query directly to AST coordinates (StartLine, EndLine) and extracts only the relevant code range:</p>
       
       <pre><code>// Instead of sending a 1000-line database.go file
-// CostAffective sends only the exact structural scope:
+// CostWise sends only the exact structural scope:
 func (m *Manager) GetSession(id string) (*Session, error) {
     m.mu.RLock()
     defer m.mu.RUnlock()
@@ -49,7 +49,7 @@ func (m *Manager) GetSession(id string) (*Session, error) {
 }</code></pre>
 
       <h3>AST Scope Invalidation & Watchdogs</h3>
-      <p>Rather than rebuilding the entire index every time you save, CostAffective runs an internal watcher. This watchdog monitors file descriptors for modifications and triggers AST scans only for the affected scopes. This maintains index consistency in under 8ms, ensuring the agent always works with current, accurate codebase structures.</p>
+      <p>Rather than rebuilding the entire index every time you save, CostWise runs an internal watcher. This watchdog monitors file descriptors for modifications and triggers AST scans only for the affected scopes. This maintains index consistency in under 8ms, ensuring the agent always works with current, accurate codebase structures.</p>
       
       <h3>Key Architectural Gains</h3>
       <ul>
@@ -65,12 +65,12 @@ func (m *Manager) GetSession(id string) (*Session, error) {
     date: 'June 08, 2026',
     author: 'okyashgajjar [Yash Gajjar]',
     readTime: '7 min read',
-    summary: 'Understanding how CostAffective organizes codebase entities (symbols, references, calls) into lightweight SQLite relational database schemas.',
+    summary: 'Understanding how CostWise organizes codebase entities (symbols, references, calls) into lightweight SQLite relational database schemas.',
     contentHtml: `
-      <p>Codebase intelligence tools need to serve queries in milliseconds. Storing indexes as raw JSON files or keeping heavy memory-pointer graphs in JVM heaps is slow and resource-heavy. CostAffective uses a local <strong>SQLite database</strong> built directly inside your repository directory.</p>
+      <p>Codebase intelligence tools need to serve queries in milliseconds. Storing indexes as raw JSON files or keeping heavy memory-pointer graphs in JVM heaps is slow and resource-heavy. CostWise uses a local <strong>SQLite database</strong> built directly inside your repository directory.</p>
       
       <h3>The Schema Structure</h3>
-      <p>By mapping declarations and usages into structured tables, CostAffective converts repository exploration into SQL query execution. The database implements three core schemas:</p>
+      <p>By mapping declarations and usages into structured tables, CostWise converts repository exploration into SQL query execution. The database implements three core schemas:</p>
       
       <pre><code>CREATE TABLE symbols (
     id TEXT PRIMARY KEY,
@@ -114,12 +114,12 @@ CREATE TABLE calls (
     date: 'June 06, 2026',
     author: 'okyashgajjar [Yash Gajjar]',
     readTime: '6 min read',
-    summary: 'A comprehensive technical breakdown of how CostAffective handles stdio-based JSON-RPC handshakes to interface with Claude Code and Cursor.',
+    summary: 'A comprehensive technical breakdown of how CostWise handles stdio-based JSON-RPC handshakes to interface with Claude Code and Cursor.',
     contentHtml: `
-      <p>The Model Context Protocol (MCP), created by Anthropic, is an open standard that allows local applications and AI assistants to securely interface with local system tools. CostAffective operates as an MCP server using a stdio transport channel.</p>
+      <p>The Model Context Protocol (MCP), created by Anthropic, is an open standard that allows local applications and AI assistants to securely interface with local system tools. CostWise operates as an MCP server using a stdio transport channel.</p>
       
       <h3>Stdio Bidirectional JSON-RPC Streams</h3>
-      <p>When you run <code>costaffective serve</code>, the host editor (such as Cursor or Claude Code) starts CostAffective as a background subprocess. The host and server communicate by writing JSON-RPC 2.0 payloads to <code>stdin</code> and reading responses from <code>stdout</code>.</p>
+      <p>When you run <code>costwise serve</code>, the host editor (such as Cursor or Claude Code) starts CostWise as a background subprocess. The host and server communicate by writing JSON-RPC 2.0 payloads to <code>stdin</code> and reading responses from <code>stdout</code>.</p>
       
       <pre><code>// Client -> Server Handshake Invitation
 {
@@ -134,7 +134,7 @@ CREATE TABLE calls (
 }</code></pre>
 
       <h3>Tool Registry & Call Processing</h3>
-      <p>During initialization, CostAffective registers its available tools: <code>search_code</code>, <code>find_symbol</code>, <code>find_references</code>, <code>find_callers</code>, and <code>get_repository_summary</code>. When the assistant needs repository context, it executes a tool call: <code>tools/call</code> with parameters matching the JSON schema.</p>
+      <p>During initialization, CostWise registers its available tools: <code>search_code</code>, <code>find_symbol</code>, <code>find_references</code>, <code>find_callers</code>, and <code>get_repository_summary</code>. When the assistant needs repository context, it executes a tool call: <code>tools/call</code> with parameters matching the JSON schema.</p>
       
       <h3>Security & Isolation</h3>
       <p>Because communication occurs over stdio streams, the server operates with several security advantages:</p>
@@ -157,8 +157,16 @@ export async function generateMetadata({ params }: PageProps) {
   if (!article) return { title: 'Article Not Found' };
   
   return {
-    title: `${article.title} | Blog`,
+    title: `${article.title} | CostWise-MCP Blog`,
     description: article.summary,
+    openGraph: {
+      title: `${article.title} | CostWise-MCP Blog`,
+      description: article.summary,
+      type: 'article',
+      publishedTime: article.date,
+      authors: ['Yash Gajjar'],
+      images: [{ url: 'https://costwise-mcp.vercel.app/logo.png', width: 1200, height: 630 }],
+    },
   };
 }
 
@@ -177,8 +185,15 @@ export default async function BlogDetailPage({ params }: PageProps) {
     'description': article.summary,
     'author': {
       '@type': 'Person',
-      'name': article.author
-    }
+      'name': 'Yash Gajjar',
+      'url': 'https://github.com/okyashgajjar'
+    },
+    'publisher': {
+      '@type': 'Organization',
+      'name': 'CostWise-MCP',
+      'logo': { '@type': 'ImageObject', 'url': 'https://costwise-mcp.vercel.app/logo.png' }
+    },
+    'mainEntityOfPage': { '@type': 'WebPage', '@id': `https://costwise-mcp.vercel.app/blog/${article.slug}` }
   };
 
   return (

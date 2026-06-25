@@ -1,10 +1,10 @@
 import Link from 'next/link';
-import { ArrowRight, Code, Key, List, Search, GitBranch, Archive, BookMarked, RefreshCw, Terminal } from 'lucide-react';
+import { ArrowRight, Code, Key, List, Search, GitBranch, Archive, BookMarked, RefreshCw, Terminal, BarChart3 } from 'lucide-react';
 
 export const metadata = {
-  title: 'MCP Tools Catalog',
+  title: '11 MCP Tools — Complete Catalog of CostWise MCP Server Tools | Yash Gajjar',
   description:
-    'The complete suite of CostAffective MCP tools: retrieval (search_code, find_symbol, find_references, find_callers, grep_code), maintenance (get_repository_summary, index_repository), and context control (remember, stash_context, recall).',
+    'Explore all 11 CostWise MCP tools: retrieval (search_code, find_symbol, read_symbol, find_references, find_callers), maintenance (get_repository_summary, index_repository), and context control (remember, stash_context, recall, session_brief). Full argument schemas and examples.',
   alternates: { canonical: '/tools' },
 };
 
@@ -12,8 +12,8 @@ export default function ToolsIndex() {
   const toolsLd = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "CostAffective MCP Tools Catalog",
-    "description": "Lists search_code, find_symbol, find_references, find_callers, and get_repository_summary tools."
+    "name": "CostWise MCP Tools Catalog",
+    "description": "Lists search_code, find_symbol, read_symbol, find_references, find_callers, get_repository_summary, index_repository, remember, stash_context, recall, and session_brief tools."
   };
 
   const list = [
@@ -46,10 +46,10 @@ export default function ToolsIndex() {
       icon: <GitBranch size={18} />
     },
     {
-      slug: 'grep-code',
-      name: 'grep_code',
+      slug: 'read-symbol',
+      name: 'read_symbol',
       group: 'Retrieval',
-      desc: 'Regex and full-text fallback search for when a literal match is what you need.',
+      desc: 'Return a symbol\'s implementation body by name, from the indexed line range.',
       icon: <Terminal size={18} />
     },
     {
@@ -86,6 +86,13 @@ export default function ToolsIndex() {
       group: 'Context control',
       desc: 'Take back only the slice you need: the budgeted match from a stash, or remembered facts.',
       icon: <Search size={18} />
+    },
+    {
+      slug: 'session-brief',
+      name: 'session_brief',
+      group: 'Context control',
+      desc: 'Compact summary of past sessions — facts, stashes, reindex events — to catch up without re-reading history.',
+      icon: <BarChart3 size={18} />
     }
   ];
 
@@ -102,7 +109,7 @@ export default function ToolsIndex() {
           <span className="eyebrow">API Catalog</span>
           <h1 className="font-display font-bold text-4xl mb-4 mt-3 text-charcoal">Model Context Protocol (MCP) Tools</h1>
           <p className="section-desc">
-            Ten tools in three groups. Retrieval answers questions in a few tokens. Maintenance keeps the index fresh.
+            Eleven tools in three groups. Retrieval answers questions in a few tokens. Maintenance keeps the index fresh.
             Context control keeps large content and durable facts out of the window.
           </p>
         </div>

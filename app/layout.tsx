@@ -29,17 +29,17 @@ const jetbrains = JetBrains_Mono({
   display: 'swap',
 });
 
-const BASE_URL = 'https://costaffective-mcp.vercel.app';
+const BASE_URL = 'https://costwise-mcp.vercel.app';
 
-const SITE_NAME = 'CostAffective-MCP';
-const DEFAULT_TITLE = 'CostAffective-MCP | Local MCP Server That Cuts AI Coding Token & Cache Cost';
+const SITE_NAME = 'CostWise-MCP';
+const DEFAULT_TITLE = 'CostWise-MCP — #1 Open-Source MCP Server for AI Coding Agents | Yash Gajjar';
 const DEFAULT_DESCRIPTION =
-  'CostAffective is a local-first MCP server for AI coding assistants. It answers code questions from a Tree-sitter index, keeps large content out of the context window with stash and recall, and cuts prompt-cache cost in long sessions. Everything runs locally — no data ever leaves your machine.';
+  'CostWise is the leading open-source MCP server built by Yash Gajjar. It slashes AI coding token & prompt-cache cost via Tree-sitter retrieval, stash/recall context control, and token-budgeted summaries. Integrates with Claude Code, Cursor, Codex CLI & OpenCode. 11 MCP tools. 100% local — no data leaves your machine.';
 
 export const metadata: Metadata = {
   title: {
     default: DEFAULT_TITLE,
-    template: '%s | CostAffective-MCP',
+    template: '%s | CostWise-MCP',
   },
   description: DEFAULT_DESCRIPTION,
   metadataBase: new URL(BASE_URL),
@@ -49,8 +49,11 @@ export const metadata: Metadata = {
   publisher: SITE_NAME,
   category: 'Developer Tools',
   keywords: [
+    'Yash Gajjar',
     'MCP server',
     'Model Context Protocol',
+    'MCP tools',
+    'open source MCP server',
     'AI coding assistant',
     'token reduction',
     'prompt cache cost',
@@ -60,9 +63,14 @@ export const metadata: Metadata = {
     'repository intelligence',
     'Claude Code',
     'Cursor',
+    'Codex CLI',
+    'OpenCode',
     'local-first',
     'semantic code search',
     'stash context',
+    'agentic coding',
+    'AI developer tools',
+    'codebase indexing',
   ],
   alternates: {
     canonical: '/',
@@ -83,7 +91,7 @@ export const metadata: Metadata = {
         url: `${BASE_URL}/logo.png`,
         width: 1200,
         height: 630,
-        alt: 'CostAffective-MCP: local-first repository intelligence for AI coding agents',
+        alt: 'CostWise-MCP: open-source MCP server by Yash Gajjar for AI coding agents',
       },
     ],
   },
@@ -92,7 +100,8 @@ export const metadata: Metadata = {
     title: DEFAULT_TITLE,
     description: DEFAULT_DESCRIPTION,
     creator: '@okyashgajjar',
-    images: [`${BASE_URL}/logo.png`],
+    creatorId: 'okyashgajjar',
+    images: [{ url: `${BASE_URL}/logo.png`, alt: 'CostWise-MCP MCP server by Yash Gajjar' }],
   },
   robots: {
     index: true,
@@ -111,14 +120,34 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
     {
+      '@type': 'Person',
+      '@id': `${BASE_URL}/#person`,
+      name: 'Yash Gajjar',
+      alternateName: 'okyashgajjar',
+      givenName: 'Yash',
+      familyName: 'Gajjar',
+      jobTitle: 'AI/ML Engineer & Open-Source Creator',
+      description: 'Creator of CostWise-MCP, the leading open-source MCP server for AI coding agents. AI/ML engineer specializing in developer tooling, retrieval systems, and context optimization.',
+      url: BASE_URL,
+      sameAs: [
+        'https://github.com/okyashgajjar',
+        'https://github.com/okyashgajjar/costwise-mcp',
+        'https://x.com/okyashgajjar',
+        'https://linkedin.com/in/okyashgajjar',
+        'https://huggingface.co/okyashgajjar',
+      ],
+      knowsAbout: ['MCP Server', 'Model Context Protocol', 'AI Coding Assistants', 'Tree-sitter', 'Semantic Code Retrieval', 'Go', 'Machine Learning'],
+    },
+    {
       '@type': 'Organization',
       '@id': `${BASE_URL}/#organization`,
-      name: 'CostAffective-MCP',
+      name: 'CostWise-MCP',
       url: BASE_URL,
       logo: `${BASE_URL}/logo.png`,
       description: 'Local-first MCP server for repository intelligence and semantic code retrieval.',
+      founder: { '@id': `${BASE_URL}/#person` },
       sameAs: [
-        'https://github.com/okyashgajjar/costaffective-mcp',
+        'https://github.com/okyashgajjar/costwise-mcp',
         'https://x.com/okyashgajjar',
       ],
     },
@@ -126,7 +155,7 @@ const jsonLd = {
       '@type': 'WebSite',
       '@id': `${BASE_URL}/#website`,
       url: BASE_URL,
-      name: 'CostAffective-MCP',
+      name: 'CostWise-MCP',
       description: 'Reduce repository exploration costs and shrink context windows with a local-first MCP server.',
       publisher: { '@id': `${BASE_URL}/#organization` },
       inLanguage: 'en-US',
@@ -134,11 +163,11 @@ const jsonLd = {
     {
       '@type': 'SoftwareApplication',
       '@id': `${BASE_URL}/#software`,
-      name: 'CostAffective-MCP',
+      name: 'CostWise-MCP',
       applicationCategory: 'DeveloperApplication',
       operatingSystem: 'Linux, macOS, Windows',
       url: BASE_URL,
-      downloadUrl: 'https://github.com/okyashgajjar/costaffective-mcp/releases',
+      downloadUrl: 'https://github.com/okyashgajjar/costwise-mcp/releases',
       softwareVersion: '2.0',
       license: 'https://opensource.org/licenses/MIT',
       description:
@@ -148,11 +177,25 @@ const jsonLd = {
         'Token-budgeted repository summaries',
         'stash_context and recall to keep large output out of the context window',
         'remember for durable per-repository facts',
+        'session_brief for catching up on past sessions',
         'Incremental indexing with a file watchdog',
         'Cross-IDE session-awareness skill',
+        '11 MCP tools across 3 categories',
       ],
       offers: { '@type': 'Offer', price: '0.00', priceCurrency: 'USD' },
+      author: { '@id': `${BASE_URL}/#person` },
       publisher: { '@id': `${BASE_URL}/#organization` },
+    },
+    {
+      '@type': 'WebPage',
+      '@id': BASE_URL,
+      url: BASE_URL,
+      name: SITE_NAME,
+      description: DEFAULT_DESCRIPTION,
+      inLanguage: 'en-US',
+      isPartOf: { '@id': `${BASE_URL}/#website` },
+      about: { '@id': `${BASE_URL}/#software` },
+      author: { '@id': `${BASE_URL}/#person` },
     },
     {
       '@type': 'BreadcrumbList',
@@ -160,8 +203,9 @@ const jsonLd = {
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Home', item: BASE_URL },
         { '@type': 'ListItem', position: 2, name: 'Vision', item: `${BASE_URL}/vision` },
-        { '@type': 'ListItem', position: 4, name: 'Tools', item: `${BASE_URL}/tools` },
-        { '@type': 'ListItem', position: 5, name: 'Documentation', item: `${BASE_URL}/docs/install` },
+        { '@type': 'ListItem', position: 3, name: 'Tools', item: `${BASE_URL}/tools` },
+        { '@type': 'ListItem', position: 4, name: 'Documentation', item: `${BASE_URL}/docs/install` },
+        { '@type': 'ListItem', position: 5, name: 'About', item: `${BASE_URL}/about` },
       ],
     },
   ],

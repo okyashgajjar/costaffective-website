@@ -22,7 +22,7 @@ const NODES: NodeDetail[] = [
     icon: <MonitorSmartphone size={18} />,
     title: 'AI Editor Client Layer',
     description:
-      'The IDE or agent issues tool calls to the local CostAffective server inside the chat context. It also loads the session-awareness guidance the server advertises on connect.',
+      'The IDE or agent issues tool calls to the local CostWise server inside the chat context. It also loads the session-awareness guidance the server advertises on connect.',
     files: ['~/.cursor/mcp.json', '~/.claude.json', 'internal/installer/targets/'],
   },
   {
@@ -32,7 +32,7 @@ const NODES: NodeDetail[] = [
     icon: <Cable size={18} />,
     title: 'MCP Server Transport',
     description:
-      'Handles Model Context Protocol messages over local stdio, registers the ten tools, and advertises the costaffective-session guidance through the protocol instructions field so every client receives it automatically.',
+      'Handles Model Context Protocol messages over local stdio, registers the ten tools, and advertises the costwise-session guidance through the protocol instructions field so every client receives it automatically.',
     files: ['internal/mcpserver/server.go', 'internal/mcpserver/tools.go', 'internal/skill/'],
   },
   {

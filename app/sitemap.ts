@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 
-const WEBSITE_URL = 'https://costaffective-mcp.vercel.app';
+const WEBSITE_URL = 'https://costwise-mcp.vercel.app';
 
 const staticRoutes: { url: string; priority: number; changeFreq: 'weekly' | 'daily' | 'monthly' }[] = [
   { url: '/', priority: 1.0, changeFreq: 'weekly' },
@@ -10,6 +10,7 @@ const staticRoutes: { url: string; priority: number; changeFreq: 'weekly' | 'dai
   { url: '/faq', priority: 0.6, changeFreq: 'monthly' },
   { url: '/mcp', priority: 0.7, changeFreq: 'monthly' },
   { url: '/tools', priority: 0.8, changeFreq: 'monthly' },
+  { url: '/about', priority: 0.9, changeFreq: 'monthly' },
   { url: '/use-cases', priority: 0.6, changeFreq: 'monthly' },
 ];
 
@@ -34,12 +35,13 @@ const toolRoutes: string[] = [
   '/tools/find-symbol',
   '/tools/find-references',
   '/tools/find-callers',
-  '/tools/grep-code',
+  '/tools/read-symbol',
   '/tools/repository-summary',
   '/tools/index-repository',
   '/tools/remember',
   '/tools/stash-context',
   '/tools/recall',
+  '/tools/session-brief',
 ];
 
 const compareRoutes: string[] = [

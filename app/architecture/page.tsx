@@ -3,15 +3,15 @@ import ArchitectureVisualizer from '@/components/ArchitectureVisualizer';
 import { ArrowRight, Cpu, Key, Database, RefreshCw, Zap } from 'lucide-react';
 
 export const metadata = {
-  title: 'System Architecture',
-  description: 'Detailed analysis of the CostAffective indexer, SQLite knowledge store, and tree-sitter relational query parser.',
+  title: 'MCP Server Architecture — Tree-Sitter Indexing & SQLite Retrieval | CostWise',
+  description: 'Deep-dive into the CostWise MCP server architecture: Tree-sitter AST parsing, incremental indexing via file watchdog, SQLite knowledge store with B-Tree indexes, and token-budgeted retrieval pipelines for AI coding agents.',
 };
 
 export default function Architecture() {
   const systemLd = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
-    'name': 'CostAffective-MCP Architecture',
+    'name': 'CostWise-MCP Architecture',
     'description': 'Statically compiled relational index parser mapping declarations, imports, and references inside local SQLite stores.'
   };
 
@@ -114,7 +114,7 @@ export default function Architecture() {
         <div className="bg-[#FAF9F6] border border-[#E5E5E0] rounded-lg p-8">
           <h2 className="font-serif font-bold text-2xl text-charcoal mb-4">Relational Index Database Schema</h2>
           <p className="text-light text-sm mb-6 leading-relaxed">
-            CostAffective maps directory relationships statically into four unified SQLite tables.
+            CostWise maps directory relationships statically into four unified SQLite tables.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 font-mono text-xs text-charcoal">
             <div className="bg-white border border-[#E5E5E0] p-5 rounded shadow-sm">

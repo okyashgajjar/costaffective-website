@@ -30,13 +30,13 @@ const DOCS: Record<string, DocDetail> = {
     description: 'Detailed installation methods for Windows, macOS, and Linux variants, along with CLI commands and diagnostics.',
     contentHtml: `
       <h3>Introduction</h3>
-      <p>CostAffective-MCP runs as a local native Go binary. It maps your codebase's AST symbols, function call-graphs, and references into a local SQLite database. It interfaces with your IDE or CLI coding agent using standard Input/Output (stdio) streams.</p>
+      <p>CostWise-MCP runs as a local native Go binary. It maps your codebase's AST symbols, function call-graphs, and references into a local SQLite database. It interfaces with your IDE or CLI coding agent using standard Input/Output (stdio) streams.</p>
 
       <h3>1. Linux Installation (Variants)</h3>
       
       <h4>Variant A: Automated Installer Script (amd64 & arm64)</h4>
       <p>The recommended way to install on modern Linux distributions. It automatically checks for Go and C compiler dependencies, builds from source, and registers with your AI clients:</p>
-      <pre><code>curl -fsSL https://raw.githubusercontent.com/okyashgajjar/costaffective-mcp/main/install.sh | bash</code></pre>
+      <pre><code>curl -fsSL https://raw.githubusercontent.com/okyashgajjar/costwise-mcp/main/install.sh | bash</code></pre>
       
       <h4>Variant B: Debian / Ubuntu Manual Build</h4>
       <p>Install system build dependencies and compile the binary manually:</p>
@@ -44,11 +44,11 @@ const DOCS: Record<string, DocDetail> = {
 sudo apt update && sudo apt install -y golang-go gcc git
 
 # Build and verify
-git clone https://github.com/okyashgajjar/costaffective-mcp.git
-cd costaffective-mcp
-CGO_ENABLED=1 go build -o ~/.local/bin/costaffective ./cmd/costaffective
-chmod +x ~/.local/bin/costaffective
-costaffective --version</code></pre>
+git clone https://github.com/okyashgajjar/costwise-mcp.git
+cd costwise-mcp
+CGO_ENABLED=1 go build -o ~/.local/bin/costwise ./cmd/costwise
+chmod +x ~/.local/bin/costwise
+costwise --version</code></pre>
 
       <h4>Variant C: Alpine Linux Build</h4>
       <p>Alpine requires specific compilation environment setups to accommodate musl libc and native build tooling:</p>
@@ -56,37 +56,37 @@ costaffective --version</code></pre>
 apk add --no-cache go build-base git
 
 # Clone and compile
-git clone https://github.com/okyashgajjar/costaffective-mcp.git
-cd costaffective-mcp
-CGO_ENABLED=1 go build -o ~/.local/bin/costaffective ./cmd/costaffective</code></pre>
+git clone https://github.com/okyashgajjar/costwise-mcp.git
+cd costwise-mcp
+CGO_ENABLED=1 go build -o ~/.local/bin/costwise ./cmd/costwise</code></pre>
 
       <h4>Variant D: RHEL / Fedora / CentOS Build</h4>
       <p>For Red Hat family distributions, configure using <code>dnf</code>:</p>
       <pre><code>sudo dnf install -y golang gcc git
-git clone https://github.com/okyashgajjar/costaffective-mcp.git
-cd costaffective-mcp
-CGO_ENABLED=1 go build -o ~/.local/bin/costaffective ./cmd/costaffective</code></pre>
+git clone https://github.com/okyashgajjar/costwise-mcp.git
+cd costwise-mcp
+CGO_ENABLED=1 go build -o ~/.local/bin/costwise ./cmd/costwise</code></pre>
 
       <h3>2. macOS Installation (Variants)</h3>
       
       <h4>Variant A: Automated Shell Script (Intel & Apple Silicon)</h4>
       <p>Run the automated script inside your macOS Terminal to set up paths and config targets:</p>
-      <pre><code>curl -fsSL https://raw.githubusercontent.com/okyashgajjar/costaffective-mcp/main/install.sh | bash</code></pre>
+      <pre><code>curl -fsSL https://raw.githubusercontent.com/okyashgajjar/costwise-mcp/main/install.sh | bash</code></pre>
       
       <h4>Variant B: Apple Silicon (M1 / M2 / M3 / M4 arm64) Manual Build</h4>
       <p>Ensure you have Xcode Command Line Tools installed (<code>xcode-select --install</code>). Build natively targeting ARM64 architecture:</p>
       <pre><code># Build targeting local ARM64 arch
-git clone https://github.com/okyashgajjar/costaffective-mcp.git
-cd costaffective-mcp
-CGO_ENABLED=1 GOOS=darwin GOARCH=arm64 go build -o ~/.local/bin/costaffective ./cmd/costaffective
-chmod +x ~/.local/bin/costaffective</code></pre>
+git clone https://github.com/okyashgajjar/costwise-mcp.git
+cd costwise-mcp
+CGO_ENABLED=1 GOOS=darwin GOARCH=arm64 go build -o ~/.local/bin/costwise ./cmd/costwise
+chmod +x ~/.local/bin/costwise</code></pre>
 
       <h4>Variant C: macOS Intel (amd64) Manual Build</h4>
       <p>Compile natively targeting Intel x86_64 architecture:</p>
-      <pre><code>git clone https://github.com/okyashgajjar/costaffective-mcp.git
-cd costaffective-mcp
-CGO_ENABLED=1 GOOS=darwin GOARCH=amd64 go build -o ~/.local/bin/costaffective ./cmd/costaffective
-chmod +x ~/.local/bin/costaffective</code></pre>
+      <pre><code>git clone https://github.com/okyashgajjar/costwise-mcp.git
+cd costwise-mcp
+CGO_ENABLED=1 GOOS=darwin GOARCH=amd64 go build -o ~/.local/bin/costwise ./cmd/costwise
+chmod +x ~/.local/bin/costwise</code></pre>
 
       <h3>3. Windows Installation (Variants)</h3>
       
@@ -96,66 +96,66 @@ chmod +x ~/.local/bin/costaffective</code></pre>
 wsl --install
 
 # Once inside WSL (Ubuntu), run the shell installer:
-curl -fsSL https://raw.githubusercontent.com/okyashgajjar/costaffective-mcp/main/install.sh | bash</code></pre>
+curl -fsSL https://raw.githubusercontent.com/okyashgajjar/costwise-mcp/main/install.sh | bash</code></pre>
 
       <h4>Variant B: Native PowerShell Build (Requires Go + gcc)</h4>
       <p>To run natively on Windows without WSL, you must have Go 1.25+ and a gcc compiler (such as MinGW-w64) installed and configured in your environment PATH:</p>
       <pre><code># In PowerShell:
-git clone https://github.com/okyashgajjar/costaffective-mcp.git
-cd costaffective-mcp
+git clone https://github.com/okyashgajjar/costwise-mcp.git
+cd costwise-mcp
 $env:CGO_ENABLED=1
-go build -o costaffective.exe ./cmd/costaffective/
-Move-Item costaffective.exe C:\\Users\\$env:USERNAME\\.local\\bin\\</code></pre>
+go build -o costwise.exe ./cmd/costwise/
+Move-Item costwise.exe C:\\Users\\$env:USERNAME\\.local\\bin\\</code></pre>
 
       <h3>4. CLI Utility Commands</h3>
       <p>Once the binary is built, use these utility flags to manage and repair client configurations:</p>
       <pre><code># Run interactive auto-installer (detects and configures clients)
-costaffective install
+costwise install
 
 # Configure all detected clients automatically without prompts
-costaffective install --all
+costwise install --all
 
 # Configure a specific editor target
-costaffective install --target cursor
-costaffective install --target claude
+costwise install --target cursor
+costwise install --target claude
 
 # Rebuild the binary from source before configuring clients
-costaffective install --build
+costwise install --build
 
 # Install without the session-awareness skill
-costaffective install --no-skill
+costwise install --no-skill
 
 # Run idempotent repair mode (fixes broken paths/configs)
-costaffective install --repair</code></pre>
+costwise install --repair</code></pre>
 
       <h3>5. Session-Awareness Skill</h3>
-      <p>Installation also adds the costaffective-session skill, which teaches your editor to keep sessions lean (stash large output, recall only what is needed, remember durable facts). Every MCP client receives this guidance automatically through the server. You can also manage the native skill file directly:</p>
+      <p>Installation also adds the costwise-session skill, which teaches your editor to keep sessions lean (stash large output, recall only what is needed, remember durable facts). Every MCP client receives this guidance automatically through the server. You can also manage the native skill file directly:</p>
       <pre><code># Write the Claude Code skill (also runs during install)
-costaffective skill install
+costwise skill install
 
 # Write it into the current project only
-costaffective skill install --local
+costwise skill install --local
 
 # Remove it
-costaffective skill uninstall
+costwise skill uninstall
 
 # Print the guidance for manual placement in any tool
-costaffective skill print</code></pre>
+costwise skill print</code></pre>
 
       <h3>6. Diagnostics with Doctor Command</h3>
       <p>Verify that the installation is intact and all IDE configurations are running with correct absolute binary paths:</p>
-      <pre><code>costaffective doctor</code></pre>
+      <pre><code>costwise doctor</code></pre>
       
       <h4>Diagnostics Output Structure:</h4>
-      <pre><code>CostAffective Doctor
+      <pre><code>CostWise Doctor
 
 PASS Binary Found
-       ~/.local/bin/costaffective
+       ~/.local/bin/costwise
 PASS Binary Permissions
 PASS Binary Version
-       costaffective version 1.0.0
+       costwise version 1.0.0
 PASS Binary in PATH
-       /home/user/.local/bin/costaffective
+       /home/user/.local/bin/costwise
 PASS Cursor Config
        ~/.cursor/mcp.json
 PASS OpenCode Config
@@ -173,7 +173,7 @@ Results: 10 PASS, 0 WARN, 0 FAIL
 Status: READY</code></pre>
 
       <div class="my-6 p-4 border-l-4 border-amber-500 bg-amber-500/5 text-xs text-light rounded-r">
-        <strong>Important Schema Design:</strong> CostAffective strictly uses absolute paths for server executables in client configurations. This avoids reliance on user shell PATH variables which often fail to load correctly inside editor subprocesses.
+        <strong>Important Schema Design:</strong> CostWise strictly uses absolute paths for server executables in client configurations. This avoids reliance on user shell PATH variables which often fail to load correctly inside editor subprocesses.
       </div>
     `
   },
@@ -181,18 +181,18 @@ Status: READY</code></pre>
     slug: 'opencode',
     title: 'OpenCode Integration',
     category: 'Integrations',
-    description: 'Setup guide for integrating CostAffective into the OpenCode assistant platform.',
+    description: 'Setup guide for integrating CostWise into the OpenCode assistant platform.',
     contentHtml: `
       <h3>OpenCode Configuration</h3>
-      <p>OpenCode loads MCP servers using local JSON schemas. Locate your workspace configurations and add CostAffective to the active server mappings.</p>
+      <p>OpenCode loads MCP servers using local JSON schemas. Locate your workspace configurations and add CostWise to the active server mappings.</p>
       
       <h3>Configuration Block</h3>
       <p>Locate or create your configuration file at: <code>~/.config/opencode/opencode.jsonc</code>.</p>
       <p>Add the following settings block to register the absolute binary path:</p>
       <pre><code>{
   "mcpServers": {
-    "costaffective": {
-      "command": "/home/user/.local/bin/costaffective",
+    "costwise": {
+      "command": "/home/user/.local/bin/costwise",
       "args": ["serve"],
       "enabled": true
     }
@@ -210,12 +210,12 @@ Status: READY</code></pre>
     description: 'Integrate the local indexer with Codex developer models.',
     contentHtml: `
       <h3>Codex CLI Configuration</h3>
-      <p>Codex reads local context mappings to populate agent prompt memories. Adding CostAffective ensures Codex is provided with token-compressed AST files instead of raw directory listings.</p>
+      <p>Codex reads local context mappings to populate agent prompt memories. Adding CostWise ensures Codex is provided with token-compressed AST files instead of raw directory listings.</p>
       
       <h3>Profile Mapping</h3>
       <p>Add the server to your Codex client configurations at <code>~/.codex/config.toml</code>:</p>
-      <pre><code>[mcp.servers.costaffective]
-command = "/home/user/.local/bin/costaffective"
+      <pre><code>[mcp.servers.costwise]
+command = "/home/user/.local/bin/costwise"
 args = ["serve"]</code></pre>
     `
   },
@@ -223,7 +223,7 @@ args = ["serve"]</code></pre>
     slug: 'claude-code',
     title: 'Claude Code Setup',
     category: 'Integrations',
-    description: 'Add CostAffective to Claude Code CLI configurations for prompt token reductions.',
+    description: 'Add CostWise to Claude Code CLI configurations for prompt token reductions.',
     contentHtml: `
       <h3>Claude Code CLI Setup</h3>
       <p>Claude Code uses the global user configuration profile located at <code>~/.claude.json</code> to launch MCP subprocesses during tasks.</p>
@@ -231,19 +231,19 @@ args = ["serve"]</code></pre>
       <h3>Step-by-Step Integration</h3>
       <ol>
         <li>Locate the config file at <code>~/.claude.json</code>. If it does not exist, create an empty JSON file.</li>
-        <li>Inject the CostAffective server block inside the <code>mcpServers</code> dictionary using absolute binary paths:</li>
+        <li>Inject the CostWise server block inside the <code>mcpServers</code> dictionary using absolute binary paths:</li>
       </ol>
       <pre><code>{
   "mcpServers": {
-    "costaffective": {
-      "command": "/home/user/.local/bin/costaffective",
+    "costwise": {
+      "command": "/home/user/.local/bin/costwise",
       "args": ["serve"]
     }
   }
 }</code></pre>
       
       <h3>Verify Tools Discovery</h3>
-      <p>Run Claude Code in your terminal. You can check that the CostAffective tools are registered successfully by running:</p>
+      <p>Run Claude Code in your terminal. You can check that the CostWise tools are registered successfully by running:</p>
       <pre><code># Inside Claude Code shell
 /tools</code></pre>
     `
@@ -252,7 +252,7 @@ args = ["serve"]</code></pre>
     slug: 'cursor',
     title: 'Cursor IDE Integration',
     category: 'Integrations',
-    description: 'Inject CostAffective MCP tools into Cursor settings.',
+    description: 'Inject CostWise MCP tools into Cursor settings.',
     contentHtml: `
       <h3>Cursor IDE Configuration</h3>
       <p>Cursor supports external MCP servers natively through its Settings tab. This allows Cursor\'s Composer agent to query SQLite codebase tables dynamically.</p>
@@ -263,9 +263,9 @@ args = ["serve"]</code></pre>
         <li>Click <strong>+ Add New MCP Server</strong>.</li>
         <li>Configure the popup parameters:
           <ul>
-            <li><strong>Name:</strong> <code>costaffective</code></li>
+            <li><strong>Name:</strong> <code>costwise</code></li>
             <li><strong>Type:</strong> <code>stdio</code></li>
-            <li><strong>Command:</strong> <code>/home/user/.local/bin/costaffective serve</code></li>
+            <li><strong>Command:</strong> <code>/home/user/.local/bin/costwise serve</code></li>
           </ul>
         </li>
         <li>Click Save. Confirm the status light turns green.</li>
@@ -285,8 +285,8 @@ args = ["serve"]</code></pre>
       <p>Configure the server by editing your tool configuration file at: <code>~/.gemini/config/mcp_config.json</code>.</p>
       <pre><code>{
   "mcpServers": {
-    "costaffective": {
-      "command": "/home/user/.local/bin/costaffective",
+    "costwise": {
+      "command": "/home/user/.local/bin/costwise",
       "args": ["serve"]
     }
   }
@@ -317,37 +317,37 @@ args = ["serve"]</code></pre>
           <tr>
             <td className="border border-[#E5E5E0] p-2 font-semibold">Go not installed</td>
             <td className="border border-[#E5E5E0] p-2 font-mono">"build failed: exec: 'go': executable file not found in $PATH"</td>
-            <td className="border border-[#E5E5E0] p-2">CostAffective installer compiles code from source. Run <code>sudo apt install golang-go</code> or download Go from golang.org.</td>
+            <td className="border border-[#E5E5E0] p-2">CostWise installer compiles code from source. Run <code>sudo apt install golang-go</code> or download Go from golang.org.</td>
           </tr>
           <tr className="bg-[#FAF9F6]/20">
             <td className="border border-[#E5E5E0] p-2 font-semibold">Binary folder missing</td>
-            <td className="border border-[#E5E5E0] p-2 font-mono">"CostAffective was not installed to ~/.local/bin/costaffective"</td>
+            <td className="border border-[#E5E5E0] p-2 font-mono">"CostWise was not installed to ~/.local/bin/costwise"</td>
             <td className="border border-[#E5E5E0] p-2">Your system is missing the local binary bin folder. Run: <code>mkdir -p ~/.local/bin</code> and verify writing permissions.</td>
           </tr>
           <tr>
             <td className="border border-[#E5E5E0] p-2 font-semibold">Binary not executable</td>
             <td className="border border-[#E5E5E0] p-2 font-mono">"exists but is not executable"</td>
-            <td className="border border-[#E5E5E0] p-2">Executable bit is missing. Fix via <code>chmod +x ~/.local/bin/costaffective</code> or run <code>costaffective install --repair</code>.</td>
+            <td className="border border-[#E5E5E0] p-2">Executable bit is missing. Fix via <code>chmod +x ~/.local/bin/costwise</code> or run <code>costwise install --repair</code>.</td>
           </tr>
           <tr className="bg-[#FAF9F6]/20">
             <td className="border border-[#E5E5E0] p-2 font-semibold">Binary corrupted</td>
             <td className="border border-[#E5E5E0] p-2 font-mono">"did not respond to --version"</td>
-            <td className="border border-[#E5E5E0] p-2">Binary did not execute cleanly. Run <code>costaffective install --repair</code> to trigger a clean rebuild.</td>
+            <td className="border border-[#E5E5E0] p-2">Binary did not execute cleanly. Run <code>costwise install --repair</code> to trigger a clean rebuild.</td>
           </tr>
           <tr>
             <td className="border border-[#E5E5E0] p-2 font-semibold">Relative binary path</td>
             <td className="border border-[#E5E5E0] p-2 font-mono">"uses a relative binary path"</td>
-            <td className="border border-[#E5E5E0] p-2">Subprocesses launched by editors require absolute paths. Run <code>costaffective install --repair</code> to write absolute paths into configs.</td>
+            <td className="border border-[#E5E5E0] p-2">Subprocesses launched by editors require absolute paths. Run <code>costwise install --repair</code> to write absolute paths into configs.</td>
           </tr>
           <tr className="bg-[#FAF9F6]/20">
             <td className="border border-[#E5E5E0] p-2 font-semibold">Invalid JSON config</td>
             <td className="border border-[#E5E5E0] p-2 font-mono">"Invalid JSON in ~/.cursor/mcp.json"</td>
-            <td className="border border-[#E5E5E0] p-2">Cursor config is corrupted. Re-run <code>costaffective install --repair</code> to rebuild the config structure.</td>
+            <td className="border border-[#E5E5E0] p-2">Cursor config is corrupted. Re-run <code>costwise install --repair</code> to rebuild the config structure.</td>
           </tr>
           <tr>
             <td className="border border-[#E5E5E0] p-2 font-semibold">MCP Handshake Failure</td>
             <td className="border border-[#E5E5E0] p-2 font-mono">"Server did not respond to initialize"</td>
-            <td className="border border-[#E5E5E0] p-2">Verify binary launch works outside the IDE by running <code>costaffective serve</code>. If it crashes, inspect dynamic library attachments.</td>
+            <td className="border border-[#E5E5E0] p-2">Verify binary launch works outside the IDE by running <code>costwise serve</code>. If it crashes, inspect dynamic library attachments.</td>
           </tr>
           <tr className="bg-[#FAF9F6]/20">
             <td className="border border-[#E5E5E0] p-2 font-semibold">Index Directory Locked</td>
@@ -381,8 +381,12 @@ export async function generateMetadata({ params }: PageProps) {
   if (!doc) return { title: 'Doc Not Found' };
   
   return {
-    title: `${doc.title} | Developer Documentation`,
-    description: doc.description,
+    title: `${doc.title} — CostWise MCP Server Docs`,
+    description: `${doc.description} Learn how to install and configure the CostWise MCP server for AI coding agents.`,
+    openGraph: {
+      title: `${doc.title} — CostWise MCP Server Setup Guide`,
+      description: doc.description,
+    },
   };
 }
 
@@ -413,7 +417,7 @@ export default async function DocDetailPage({ params }: PageProps) {
     'articleSection': doc.category,
     'author': {
       '@type': 'Organization',
-      'name': 'CostAffective Dev Rel Team'
+      'name': 'CostWise Dev Rel Team'
     }
   };
 

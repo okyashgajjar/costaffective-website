@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 
 const LOG_LINES = [
-  { text: 'Initializing CostAffective MCP Server...', type: 't-cyan' },
+  { text: 'Initializing CostWise MCP Server...', type: 't-cyan' },
   { text: 'Loading tree-sitter parser engines (Go, Python, TS)...', type: 't-grey' },
   { text: 'Connecting local SQLite store [size: 14.2MB, hashes: 4,192]', type: 't-grey' },
   { text: 'File system watchdog active. Monitoring /Research-Architectures/CLI', type: 't-grey' },
@@ -73,7 +73,7 @@ export default function InteractiveTerminal() {
           <span className="btn-dot minimize"></span>
           <span className="btn-dot expand"></span>
         </div>
-        <div className="terminal-title">costaffective --serve</div>
+        <div className="terminal-title">costwise --serve</div>
         <span className="terminal-tab">logs</span>
       </div>
       <div className="terminal-body">

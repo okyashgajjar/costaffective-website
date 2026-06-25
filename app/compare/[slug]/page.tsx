@@ -22,8 +22,12 @@ export async function generateMetadata({ params }: PageProps) {
   if (!data) return { title: 'Not Found' };
   
   return {
-    title: `CostAffective vs ${data.name} | Feature & Benchmark Comparison`,
-    description: `Compare CostAffective with ${data.name}. Discover token cost savings, offline security benefits, and complete code migration guides.`,
+    title: `CostWise MCP vs ${data.name} — Feature & Benchmark Comparison`,
+    description: `${data.headline} Compare token cost savings, offline security, AST retrieval, and MCP tool capabilities between CostWise and ${data.name}.`,
+    openGraph: {
+      title: `CostWise MCP vs ${data.name} — Which MCP Server is Better?`,
+      description: data.tagline,
+    },
   };
 }
 
@@ -38,7 +42,7 @@ export default async function ComparePage({ params }: PageProps) {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'Product',
-    'name': `CostAffective-MCP vs ${data.name}`,
+    'name': `CostWise-MCP vs ${data.name}`,
     'description': data.description,
     'offers': {
       '@type': 'Offer',
@@ -68,7 +72,7 @@ export default async function ComparePage({ params }: PageProps) {
         <div className="section-header text-left max-w-full mb-12">
           <span className="section-pill uppercase text-xs">Comparison Guide</span>
           <h1 className="font-serif font-bold text-4xl text-charcoal mb-4 mt-2">
-            CostAffective vs {data.name}
+            CostWise vs {data.name}
           </h1>
           <p className="text-light text-base max-w-[700px] leading-relaxed">
             {data.description}
@@ -85,7 +89,7 @@ export default async function ComparePage({ params }: PageProps) {
               <thead className="bg-[#FAF9F6] text-grey uppercase text-[10px] font-bold border-b border-[#E5E5E0]">
                 <tr>
                   <th className="p-4">Feature Capabilities</th>
-                  <th className="p-4">CostAffective</th>
+                  <th className="p-4">CostWise</th>
                   <th className="p-4">{data.name}</th>
                 </tr>
               </thead>
@@ -114,7 +118,7 @@ export default async function ComparePage({ params }: PageProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           <div className="bg-green-50/20 border border-green-200/50 rounded-lg p-6">
             <h3 className="font-serif font-bold text-lg text-green-800 mb-4 flex items-center gap-2">
-              <Check size={18} /> CostAffective Advantages
+              <Check size={18} /> CostWise Advantages
             </h3>
             <ul className="space-y-3">
               {data.strengths.map((str, idx) => (
@@ -146,7 +150,7 @@ export default async function ComparePage({ params }: PageProps) {
           <h2 className="font-serif font-bold text-2xl text-charcoal mb-6">Structural Comparison</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="benefit-card">
-              <h3 className="font-serif font-bold text-base text-charcoal mb-3">CostAffective Architecture</h3>
+              <h3 className="font-serif font-bold text-base text-charcoal mb-3">CostWise Architecture</h3>
               <p className="text-light text-xs leading-relaxed">{data.architecture.costAffective}</p>
             </div>
             <div className="benefit-card">
@@ -161,9 +165,9 @@ export default async function ComparePage({ params }: PageProps) {
 
         {/* Migration Guide */}
         <div className="border-t border-[#E5E5E0] pt-12">
-          <h2 className="font-serif font-bold text-2xl text-charcoal mb-4">Migration Guide: Moving to CostAffective</h2>
+          <h2 className="font-serif font-bold text-2xl text-charcoal mb-4">Migration Guide: Moving to CostWise</h2>
           <p className="text-light text-sm mb-6 leading-relaxed">
-            Switching is quick. CostAffective integrates into the same Model Context Protocol slots as {data.name}.
+            Switching is quick. CostWise integrates into the same Model Context Protocol slots as {data.name}.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
             <div>
@@ -177,7 +181,7 @@ export default async function ComparePage({ params }: PageProps) {
             <div className="bg-charcoal text-white rounded-lg p-6 font-mono text-xs overflow-x-auto">
               <div className="text-gray-400 mb-2">// BEFORE ({data.name})</div>
               <pre className="text-red-400 mb-6">{data.migration.configBefore}</pre>
-              <div className="text-gray-400 mb-2">// AFTER (CostAffective)</div>
+              <div className="text-gray-400 mb-2">// AFTER (CostWise)</div>
               <pre className="text-green-400">{data.migration.configAfter}</pre>
             </div>
           </div>

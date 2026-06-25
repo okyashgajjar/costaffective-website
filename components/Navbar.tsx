@@ -15,7 +15,8 @@ export default function Navbar() {
     { href: '/docs/install', label: 'Docs' },
     { href: '/blog', label: 'Blog' },
     { href: '/faq', label: 'FAQ' },
-    { href: '/mcp', label: 'MCP' }
+    { href: '/mcp', label: 'MCP' },
+    { href: '/about', label: 'About' }
   ];
 
   return (
@@ -26,10 +27,10 @@ export default function Navbar() {
           <span className="brand-logo">
             <Terminal size={18} className="mr-1 stroke-[2.5]" />
           </span>
-          CostAffective
+          CostWise
         </Link>
         <a 
-          href="https://github.com/okyashgajjar/costaffective-mcp" 
+          href="https://github.com/okyashgajjar/costwise-mcp" 
           target="_blank" 
           rel="noopener noreferrer" 
           className="mobile-github-btn"
@@ -46,7 +47,7 @@ export default function Navbar() {
             <span className="brand-logo">
               <Terminal size={20} className="mr-1 stroke-[2.5]" />
             </span>
-            CostAffective-MCP
+            CostWise-MCP
           </Link>
           
           <nav className="nav-links">
@@ -67,7 +68,7 @@ export default function Navbar() {
           </nav>
           
           <div className="flex items-center gap-2">
-            <a href="https://github.com/okyashgajjar/costaffective-mcp" target="_blank" rel="noopener noreferrer" className="btn btn-github py-1.5 px-3.5 text-xs">
+            <a href="https://github.com/okyashgajjar/costwise-mcp" target="_blank" rel="noopener noreferrer" className="btn btn-github py-1.5 px-3.5 text-xs">
               GitHub <span className="star-badge">★</span>
             </a>
           </div>

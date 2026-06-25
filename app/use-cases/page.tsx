@@ -2,32 +2,32 @@ import Link from 'next/link';
 import { Shield, GitPullRequest, Code, Search, Layers } from 'lucide-react';
 
 export const metadata = {
-  title: 'CostAffective Use Cases',
-  description: 'Learn how to apply local repository intelligence for coding agents, code reviews, monorepos, and audits.',
+  title: 'MCP Server Use Cases — AI Coding, Code Review & Repository Intelligence | CostWise',
+  description: 'Real-world use cases for the CostWise MCP server: slash AI coding token costs, accelerate code reviews with AST-aware search, navigate monorepos with token-budgeted summaries, and audit codebases with call-graph analysis.',
 };
 
 export default function UseCases() {
   const casesLd = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
-    'name': 'CostAffective MCP Use Cases',
+    'name': 'CostWise MCP Use Cases',
     'description': 'Identifies key developer workflows including monorepo search, agent context optimization, and structural codebase review audits.'
   };
 
   const list = [
     {
       title: 'AI Coding Agents',
-      desc: 'Coding agents often query wide scopes, loading massive file volumes into prompt context. CostAffective intercepts calls, statically locates exact symbol references, and returns only logical bounds, saving substantially on token expenses.',
+      desc: 'Coding agents often query wide scopes, loading massive file volumes into prompt context. CostWise intercepts calls, statically locates exact symbol references, and returns only logical bounds, saving substantially on token expenses.',
       icon: <Layers className="text-blue-600" />
     },
     {
       title: 'Large Monorepos',
-      desc: 'Standard regex grep scanners choke on monorepos with thousands of files. CostAffective utilizes fast SQLite b-tree indexes to query symbol locations, returning matches in microseconds without scanning disk directories on every query.',
+      desc: 'Standard regex grep scanners choke on monorepos with thousands of files. CostWise utilizes fast SQLite b-tree indexes to query symbol locations, returning matches in microseconds without scanning disk directories on every query.',
       icon: <Search className="text-green-600" />
     },
     {
       title: 'Code Reviews',
-      desc: 'Understand the impact of incoming commits. CostAffective traces function caller hierarchies, indicating which structures depend on changes to help developers audit side-effects.',
+      desc: 'Understand the impact of incoming commits. CostWise traces function caller hierarchies, indicating which structures depend on changes to help developers audit side-effects.',
       icon: <GitPullRequest className="text-purple-600" />
     },
     {

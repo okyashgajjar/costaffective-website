@@ -3,17 +3,17 @@ import Link from 'next/link';
 import { ArrowRight, Archive, Search, BookMarked } from 'lucide-react';
 import Reveal from '@/components/Reveal';
 
-const BASE_URL = 'https://costaffective-mcp.vercel.app';
+const BASE_URL = 'https://costwise-mcp.vercel.app';
 
 export const metadata: Metadata = {
-  title: 'The Vision: Why CostAffective Cuts Prompt-Cache Cost',
+  title: 'The Vision: Why CostWise Cuts Prompt-Cache Cost',
   description:
-    'The reasoning behind CostAffective: in long AI coding sessions the dominant cost is the prompt cache re-reading and re-writing the context window. The only lever a local MCP server controls is how many tokens enter that window. Here is how we shrink it without losing information.',
+    'The reasoning behind CostWise: in long AI coding sessions the dominant cost is the prompt cache re-reading and re-writing the context window. The only lever a local MCP server controls is how many tokens enter that window. Here is how we shrink it without losing information.',
   alternates: { canonical: '/vision' },
   openGraph: {
-    title: 'The Vision: Why CostAffective Cuts Prompt-Cache Cost',
+    title: 'The Vision: Why CostWise Cuts Prompt-Cache Cost',
     description:
-      'In long AI coding sessions the dominant cost is the prompt cache, not the model output. CostAffective keeps tokens out of the context window, losslessly.',
+      'In long AI coding sessions the dominant cost is the prompt cache, not the model output. CostWise keeps tokens out of the context window, losslessly.',
     url: `${BASE_URL}/vision`,
     type: 'article',
   },
@@ -23,11 +23,11 @@ export default function VisionPage() {
   const articleLd = {
     '@context': 'https://schema.org',
     '@type': 'TechArticle',
-    headline: 'Why CostAffective Cuts Prompt-Cache Cost',
+    headline: 'Why CostWise Cuts Prompt-Cache Cost',
     description:
-      'The reasoning behind CostAffective: the dominant cost in long AI coding sessions is the prompt cache re-reading and re-writing the context window.',
+      'The reasoning behind CostWise: the dominant cost in long AI coding sessions is the prompt cache re-reading and re-writing the context window.',
     author: { '@type': 'Person', name: 'Yash Gajjar' },
-    publisher: { '@type': 'Organization', name: 'CostAffective-MCP', logo: { '@type': 'ImageObject', url: `${BASE_URL}/logo.png` } },
+    publisher: { '@type': 'Organization', name: 'CostWise-MCP', logo: { '@type': 'ImageObject', url: `${BASE_URL}/logo.png` } },
     mainEntityOfPage: `${BASE_URL}/vision`,
   };
 
@@ -53,7 +53,7 @@ export default function VisionPage() {
       },
       {
         '@type': 'Question',
-        name: 'How does CostAffective reduce the context window without losing information?',
+        name: 'How does CostWise reduce the context window without losing information?',
         acceptedAnswer: {
           '@type': 'Answer',
           text: 'It answers from a local index instead of dumping files, budgets repository summaries, and provides stash_context and recall to move large output out of the window behind a small handle. Stashing relocates tokens to disk rather than deleting them, so the full content is always recoverable.',
@@ -79,7 +79,7 @@ export default function VisionPage() {
               It&apos;s the <span className="hero-gradient-text">context</span>.
             </h1>
             <p className="mt-6" style={{ fontSize: 19 }}>
-              CostAffective exists for one reason: in long AI coding sessions, the dominant cost is the prompt cache
+              CostWise exists for one reason: in long AI coding sessions, the dominant cost is the prompt cache
               carrying and re-caching the context window, not the model thinking. This page explains the problem, the
               one lever that actually moves it, and how every feature is built around that lever.
             </p>
@@ -131,14 +131,14 @@ export default function VisionPage() {
             </p>
             <p>
               Shrink that, and both costs fall at once: a smaller window is cheaper to read every turn and cheaper to
-              rewrite when the cache is invalidated. Every design decision in CostAffective serves this one goal: keep
+              rewrite when the cache is invalidated. Every design decision in CostWise serves this one goal: keep
               tokens out of the window without losing information.
             </p>
           </Reveal>
 
           <Reveal>
             <h2>The approach</h2>
-            <p>CostAffective is a local MCP server that does three things in service of that goal.</p>
+            <p>CostWise is a local MCP server that does three things in service of that goal.</p>
 
             <h3>1. Answer from a local index, not from raw files</h3>
             <p>
@@ -174,7 +174,7 @@ export default function VisionPage() {
           <Reveal>
             <h3>3. Make the model use all of this, automatically</h3>
             <p>
-              None of it helps if the model does not reach for it. The <code>costaffective-session</code> skill is a
+              None of it helps if the model does not reach for it. The <code>costwise-session</code> skill is a
               small piece of session-awareness guidance (about 275 tokens) that teaches the model the lean workflow
               once per session. It is delivered through the MCP protocol&apos;s instructions field, so every connected
               editor loads it on connect, plus a native Claude Code skill on top. That fixed, tiny cost pays for itself
@@ -205,7 +205,7 @@ export default function VisionPage() {
           <Reveal>
             <div className="flex flex-wrap gap-3 mt-10">
               <Link href="/docs/install" className="btn btn-action">
-                Install CostAffective
+                Install CostWise
               </Link>
               <Link href="/tools" className="btn btn-secondary inline-flex items-center gap-1">
                 See the tools <ArrowRight size={14} />

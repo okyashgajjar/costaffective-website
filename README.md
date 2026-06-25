@@ -1,15 +1,15 @@
-# CostAffective Marketing & Documentation Platform
+# CostWise Marketing & Documentation Platform
 
-This repository houses the source code for the official marketing, benchmarking, and documentation platform of **CostAffective-MCP**—a high-performance Model Context Protocol (MCP) server designed for semantic code intelligence, codebase retrieval, and token compression.
+This repository houses the source code for the official marketing, benchmarking, and documentation platform of **CostWise-MCP**—a high-performance Model Context Protocol (MCP) server designed for semantic code intelligence, codebase retrieval, and token compression.
 
-* **Production URL / Source Repository Pointer:** `https://github.com/okyashgajjar/costaffective-mcp`
+* **Production URL / Source Repository Pointer:** `https://github.com/okyashgajjar/costwise-mcp`
 * **Designed & Maintained by:** [Yash Gajjar](https://in.linkedin.com/in/okyashgajjar)
 
 ---
 
 ## 🌟 Rationale & Performance Metrics
 
-Modern LLM agents suffer from the token explosion problem during large codebase exploration. CostAffective-MCP solves this by performing AST symbol mapping and call-graph retrieval locally, resulting in:
+Modern LLM agents suffer from the token explosion problem during large codebase exploration. CostWise-MCP solves this by performing AST symbol mapping and call-graph retrieval locally, resulting in:
 * **45.9% fewer tokens** in context windows
 * **54.3% fewer exploration loops** during code navigation
 * **42.1% fewer tool calls** compared to legacy solutions (such as CodeGraph)
@@ -20,9 +20,9 @@ Modern LLM agents suffer from the token explosion problem during large codebase 
 ## 🚀 Repository References & Quick Links
 
 All core server implementation logic, script installers, and diagnostic engines are hosted in the primary Go codebase:
-* **Core Go MCP Server Codebase:** [okyashgajjar/costaffective-mcp](https://github.com/okyashgajjar/costaffective-mcp)
-* **Automated Shell Installer Script:** [install.sh](https://raw.githubusercontent.com/okyashgajjar/costaffective-mcp/main/install.sh)
-* **CLI Diagnostics Engine:** `costaffective doctor` (included in binary releases)
+* **Core Go MCP Server Codebase:** [okyashgajjar/costwise-mcp](https://github.com/okyashgajjar/costwise-mcp)
+* **Automated Shell Installer Script:** [install.sh](https://raw.githubusercontent.com/okyashgajjar/costwise-mcp/main/install.sh)
+* **CLI Diagnostics Engine:** `costwise doctor` (included in binary releases)
 * **Creator Profile Badge:** [Yash Gajjar on LinkedIn](https://in.linkedin.com/in/okyashgajjar)
 
 ---

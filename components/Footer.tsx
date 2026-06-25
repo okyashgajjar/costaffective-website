@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="site-footer">
       <div className="footer-container">
         <div className="footer-brand">
-          <h4>CostAffective-MCP</h4>
+          <h4>CostWise-MCP</h4>
           <p className="text-light mt-2">
             Local-first, deterministic repository intelligence and AST-based semantic code retrieval server, designed to optimize context sizes and token expenses for modern AI coding agents.
           </p>
@@ -27,6 +27,7 @@ export default function Footer() {
           </div>
           <div className="link-group">
             <h5>Developer</h5>
+            <Link href="/about">About Yash Gajjar</Link>
             <a href="https://github.com/okyashgajjar" target="_blank" rel="noopener noreferrer">GitHub</a>
             <a href="https://linkedin.com/in/okyashgajjar" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             <a href="https://x.com/okyashgajjar" target="_blank" rel="noopener noreferrer">X / Twitter</a>
@@ -36,7 +37,7 @@ export default function Footer() {
       </div>
       <div className="footer-bottom">
         <div>
-          © {new Date().getFullYear()} CostAffective-MCP. Open Source under the MIT License.
+          © {new Date().getFullYear()} CostWise-MCP. Open Source under the MIT License.
         </div>
         <div className="tagline">
           Save tokens. Buy Coffee.

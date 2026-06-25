@@ -9,13 +9,13 @@ export const faqsData: FAQItem[] = [
   {
     id: 'why-not-ripgrep',
     question: 'Why not just use ripgrep?',
-    answer: 'Ripgrep is exceptionally fast at finding text patterns, but it has no semantic understanding of code. It doesn\'t know the difference between a variable declaration and a string literal, nor can it follow call trees. CostAffective uses Tree-sitter AST queries to build structural maps, returning precise code scopes and relationships instead of raw, noisy regex matches.',
+    answer: 'Ripgrep is exceptionally fast at finding text patterns, but it has no semantic understanding of code. It doesn\'t know the difference between a variable declaration and a string literal, nor can it follow call trees. CostWise uses Tree-sitter AST queries to build structural maps, returning precise code scopes and relationships instead of raw, noisy regex matches.',
     category: 'core'
   },
   {
     id: 'why-not-codegraph',
     question: 'Why not use CodeGraph?',
-    answer: 'CodeGraph builds heavy, memory-resident dependency graphs that can bloat context sizes and consume massive RAM. CostAffective uses a lightweight SQLite index and returns compressed, symbol-level AST contexts instead of raw file contents.',
+    answer: 'CodeGraph builds heavy, memory-resident dependency graphs that can bloat context sizes and consume massive RAM. CostWise uses a lightweight SQLite index and returns compressed, symbol-level AST contexts instead of raw file contents.',
     category: 'core'
   },
   {
@@ -26,14 +26,14 @@ export const faqsData: FAQItem[] = [
   },
   {
     id: 'context-savings',
-    question: 'How much context can CostAffective save?',
-    answer: 'CostAffective reduces unnecessary context accumulation by answering from a local index, budgeting summaries, and moving large output out of the context window with stash and recall. This keeps every turn\'s context smaller than naive file-reading approaches.',
+    question: 'How much context can CostWise save?',
+    answer: 'CostWise reduces unnecessary context accumulation by answering from a local index, budgeting summaries, and moving large output out of the context window with stash and recall. This keeps every turn\'s context smaller than naive file-reading approaches.',
     category: 'performance'
   },
   {
     id: 'prompt-cache-cost',
-    question: 'How does CostAffective reduce prompt-cache cost in long sessions?',
-    answer: 'In long sessions the dominant cost is usually the prompt cache, not the model output: every turn pays to read the entire resident context, and any change to earlier context or a short idle gap forces a full rewrite of it. A server cannot control how a client caches, but it can control how many tokens enter the context window. CostAffective keeps that window small by answering from a local index, budgeting summaries, and moving large output out of context with stash_context and recall, which makes every turn cheaper to read and cheaper to rewrite.',
+    question: 'How does CostWise reduce prompt-cache cost in long sessions?',
+    answer: 'In long sessions the dominant cost is usually the prompt cache, not the model output: every turn pays to read the entire resident context, and any change to earlier context or a short idle gap forces a full rewrite of it. A server cannot control how a client caches, but it can control how many tokens enter the context window. CostWise keeps that window small by answering from a local index, budgeting summaries, and moving large output out of context with stash_context and recall, which makes every turn cheaper to read and cheaper to rewrite.',
     category: 'performance'
   },
   {
@@ -44,20 +44,20 @@ export const faqsData: FAQItem[] = [
   },
   {
     id: 'session-skill',
-    question: 'What is the costaffective-session skill?',
+    question: 'What is the costwise-session skill?',
     answer: 'It is a small piece of session-awareness guidance, about 275 tokens, that teaches the AI assistant to keep the session lean automatically: route large output through stash_context and recall, persist durable facts with remember, and prefer narrow retrieval over reading whole files. It is delivered to every MCP client through the protocol instructions field, plus a native Claude Code skill, so it applies once per session without you having to ask each time.',
     category: 'core'
   },
   {
     id: 'works-with-codex',
     question: 'Does it work with Codex CLI?',
-    answer: 'Yes. CostAffective is fully compatible with Codex CLI, Claude Code, Cursor, OpenCode, Antigravity, and any other IDE client supporting the standard Model Context Protocol (MCP).',
+    answer: 'Yes. CostWise is fully compatible with Codex CLI, Claude Code, Cursor, OpenCode, Antigravity, and any other IDE client supporting the standard Model Context Protocol (MCP).',
     category: 'compatibility'
   },
   {
     id: 'data-privacy',
     question: 'Does my code leave my machine?',
-    answer: 'No. CostAffective is 100% local-first. All AST parsing, index updates, search queries, and database lookups run locally on your system. No network egress, no telemetry, and no external code leaks.',
+    answer: 'No. CostWise is 100% local-first. All AST parsing, index updates, search queries, and database lookups run locally on your system. No network egress, no telemetry, and no external code leaks.',
     category: 'security'
   },
   {
@@ -69,7 +69,7 @@ export const faqsData: FAQItem[] = [
   {
     id: 'watchdog-sync',
     question: 'How does the watchdog update indexes?',
-    answer: 'CostAffective integrates a system directory watchdog (using fsnotify). When a file save occurs, the watchdog computes the file\'s hash delta and updates only the modified files in the SQLite database, completing incremental updates in under 8ms.',
+    answer: 'CostWise integrates a system directory watchdog (using fsnotify). When a file save occurs, the watchdog computes the file\'s hash delta and updates only the modified files in the SQLite database, completing incremental updates in under 8ms.',
     category: 'performance'
   },
   {
@@ -81,49 +81,43 @@ export const faqsData: FAQItem[] = [
   {
     id: 'supported-platforms',
     question: 'What platforms are supported? Does it run on macOS, Windows, and Linux?',
-    answer: 'Yes. CostAffective binaries are compiled for Linux (amd64) and Windows (amd64). macOS and Linux ARM architectures can be built from source using local Go compilers.',
+    answer: 'Yes. CostWise binaries are compiled for Linux (amd64) and Windows (amd64). macOS and Linux ARM architectures can be built from source using local Go compilers.',
     category: 'compatibility'
   },
   {
     id: 'languages-supported',
-    question: 'What languages does CostAffective support?',
-    answer: 'CostAffective currently parses Go, Python, TypeScript, JavaScript, Rust, C++, C#, Java, and HTML/CSS out-of-the-box using official Tree-sitter parsers.',
+    question: 'What languages does CostWise support?',
+    answer: 'CostWise currently parses Go, Python, TypeScript, JavaScript, Rust, C++, C#, Java, and HTML/CSS out-of-the-box using official Tree-sitter parsers.',
     category: 'core'
   },
   {
     id: 'mcp-tools-exposed',
-    question: 'What MCP tools does CostAffective expose?',
-    answer: 'It exposes six core tools: search_code, find_symbol, find_references, find_callers, grep_code, and get_repository_summary.',
-    category: 'core'
-  },
-  {
-    id: 'search-vs-grep',
-    question: 'How does search_code differ from grep_code?',
-    answer: '`search_code` leverages tree-sitter AST maps to identify functional blocks matching semantic search intents. `grep_code` is a full-text regex scanner used as a fallback for strings, comments, and untracked code chunks.',
+    question: 'What MCP tools does CostWise expose?',
+    answer: 'It exposes eleven MCP tools: five for retrieval (search_code, find_symbol, read_symbol, find_references, find_callers), two for maintenance (get_repository_summary, index_repository), and four for context control (remember, stash_context, recall, session_brief).',
     category: 'core'
   },
   {
     id: 'monorepo-support',
     question: 'Can it index large monorepos?',
-    answer: 'Yes. CostAffective is designed to handle monorepos. It leverages fast SQLite transactions and selective indexing, easily scaling to codebases containing thousands of source files.',
+    answer: 'Yes. CostWise is designed to handle monorepos. It leverages fast SQLite transactions and selective indexing, easily scaling to codebases containing thousands of source files.',
     category: 'performance'
   },
   {
     id: 'cursor-setup',
-    question: 'How do I configure CostAffective for Cursor?',
-    answer: 'Add CostAffective to Cursor\'s settings under "MCP" by specifying command "costaffective" and argument "serve" with stdio transport.',
+    question: 'How do I configure CostWise for Cursor?',
+    answer: 'Add CostWise to Cursor\'s settings under "MCP" by specifying command "costwise" and argument "serve" with stdio transport.',
     category: 'compatibility'
   },
   {
     id: 'docker-dependency',
     question: 'Does it require Docker?',
-    answer: 'No. CostAffective runs as a standalone compiled native binary. It has zero dependencies on Docker, Docker containers, or node runtimes.',
+    answer: 'No. CostWise runs as a standalone compiled native binary. It has zero dependencies on Docker, Docker containers, or node runtimes.',
     category: 'core'
   },
   {
     id: 'doctor-command',
-    question: 'What does the costaffective doctor command validate?',
-    answer: '`costaffective doctor` checks binary permissions, PATH environment variables, MCP configuration maps in user directories, SQLite read/write states, and active server run status.',
+    question: 'What does the costwise doctor command validate?',
+    answer: '`costwise doctor` checks binary permissions, PATH environment variables, MCP configuration maps in user directories, SQLite read/write states, and active server run status.',
     category: 'compatibility'
   },
   {
@@ -135,25 +129,25 @@ export const faqsData: FAQItem[] = [
   {
     id: 'token-budget-custom',
     question: 'Can I customize the token budget?',
-    answer: 'Yes. AI clients can supply token budgets as parameters to MCP tools, forcing CostAffective to compress retrieval chunks if they exceed context limits.',
+    answer: 'Yes. AI clients can supply token budgets as parameters to MCP tools, forcing CostWise to compress retrieval chunks if they exceed context limits.',
     category: 'performance'
   },
   {
     id: 'claude-code-setup',
-    question: 'How do I add CostAffective to Claude Code?',
-    answer: 'CostAffective integrates automatically. You can install it by configuring settings in `~/.claude.json` or by running the auto-setup command `costaffective install --target claude`.',
+    question: 'How do I add CostWise to Claude Code?',
+    answer: 'CostWise integrates automatically. You can install it by configuring settings in `~/.claude.json` or by running the auto-setup command `costwise install --target claude`.',
     category: 'compatibility'
   },
   {
     id: 'external-dependencies',
     question: 'Does it index third-party vendor dependencies?',
-    answer: 'By default, CostAffective ignores vendored folders (like node_modules or vendor/) to keep the index clean, but you can configure files to track internal libraries.',
+    answer: 'By default, CostWise ignores vendored folders (like node_modules or vendor/) to keep the index clean, but you can configure files to track internal libraries.',
     category: 'core'
   },
   {
     id: 'free-open-source',
-    question: 'Is CostAffective free and open-source?',
-    answer: 'Yes. CostAffective is released under the permissive MIT license and its repository is fully hosted on GitHub.',
+    question: 'Is CostWise free and open-source?',
+    answer: 'Yes. CostWise is released under the permissive MIT license and its repository is fully hosted on GitHub.',
     category: 'core'
   },
   {
@@ -182,8 +176,8 @@ export const faqsData: FAQItem[] = [
   },
   {
     id: 'build-from-source',
-    question: 'How do I build CostAffective from source?',
-    answer: 'Clone the repository and run `go build ./cmd/costaffective`. This compiles a standalone binary in the current directory.',
+    question: 'How do I build CostWise from source?',
+    answer: 'Clone the repository and run `go build ./cmd/costwise`. This compiles a standalone binary in the current directory.',
     category: 'compatibility'
   },
   {

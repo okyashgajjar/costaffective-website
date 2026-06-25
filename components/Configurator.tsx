@@ -15,8 +15,8 @@ const CONFIGS: Record<string, ConfigDetails> = {
     path: '~/.claude.json',
     code: `{
   "mcpServers": {
-    "costaffective": {
-      "command": "costaffective",
+    "costwise": {
+      "command": "costwise",
       "args": ["serve"]
     }
   }
@@ -27,8 +27,8 @@ const CONFIGS: Record<string, ConfigDetails> = {
     path: 'Settings > MCP > Add New Helper',
     code: `{
   "mcpServers": {
-    "costaffective": {
-      "command": "costaffective",
+    "costwise": {
+      "command": "costwise",
       "args": ["serve"]
     }
   }
@@ -39,8 +39,8 @@ const CONFIGS: Record<string, ConfigDetails> = {
     path: 'Settings > Extensions > Codex MCP Servers',
     code: `{
   "mcpServers": {
-    "costaffective": {
-      "command": "costaffective",
+    "costwise": {
+      "command": "costwise",
       "args": ["serve"]
     }
   }
@@ -51,8 +51,8 @@ const CONFIGS: Record<string, ConfigDetails> = {
     path: 'Workspace Config > mcp.json',
     code: `{
   "mcpServers": {
-    "costaffective": {
-      "command": "costaffective",
+    "costwise": {
+      "command": "costwise",
       "args": ["serve"]
     }
   }

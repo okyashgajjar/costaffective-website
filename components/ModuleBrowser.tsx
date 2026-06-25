@@ -12,7 +12,7 @@ interface ModuleDetail {
 
 const MODULES: Record<string, ModuleDetail> = {
   cmd: {
-    path: 'cmd/costaffective',
+    path: 'cmd/costwise',
     type: 'Binary Entrypoint',
     desc: 'Houses the main executable compiler setup. Parses command-line inputs and initiates the stdio MCP server loop.',
     filesCount: 2,

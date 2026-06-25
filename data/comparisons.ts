@@ -28,9 +28,9 @@ export const comparisonsData: Record<string, ComparisonData> = {
   codegraph: {
     slug: 'codegraph',
     name: 'CodeGraph',
-    headline: 'CostAffective vs CodeGraph',
+    headline: 'CostWise vs CodeGraph',
     tagline: 'Why local AST compression outperforms heavy index graphs.',
-    description: 'CodeGraph constructs massive neo4j-like dependency networks in local memories, incurring massive indexing overheads and context bloating. CostAffective utilizes incremental AST scope trees to send only relevant declaration scopes instead of raw file contents.',
+    description: 'CodeGraph constructs massive neo4j-like dependency networks in local memories, incurring massive indexing overheads and context bloating. CostWise utilizes incremental AST scope trees to send only relevant declaration scopes instead of raw file contents.',
     features: [
       { feature: 'Local AST Scope Extraction', costAffective: 'Yes (Tree-sitter)', competitor: 'Yes (Regex-based)', status: 'yes' },
       { feature: 'Incremental Index updates', costAffective: 'Yes (Watchdog 8ms)', competitor: 'No (Full re-parse)', status: 'yes' },
@@ -50,24 +50,24 @@ export const comparisonsData: Record<string, ComparisonData> = {
     architecture: {
       costAffective: 'A decentralized, standard SQLite key-value mapping file hashes to AST coordinates.',
       competitor: 'A heavy JVM-based graph engine that requires memory-resident graph databases.',
-      details: 'CostAffective avoids maintaining active runtime pointer chains. Instead, it relies on fast SQL index searches to retrieve definition locations.'
+      details: 'CostWise avoids maintaining active runtime pointer chains. Instead, it relies on fast SQL index searches to retrieve definition locations.'
     },
     migration: {
       steps: [
         'Uninstall CodeGraph client configurations from your IDE.',
-        'Run the CostAffective universal shell loader command.',
-        'Launch the auto-injector tool using `costaffective install --all`.'
+        'Run the CostWise universal shell loader command.',
+        'Launch the auto-injector tool using `costwise install --all`.'
       ],
       configBefore: `{\n  "mcpServers": {\n    "codegraph-mcp": {\n      "command": "docker",\n      "args": ["run", "-i", "codegraph/server"]\n    }\n  }\n}`,
-      configAfter: `{\n  "mcpServers": {\n    "costaffective": {\n      "command": "costaffective",\n      "args": ["serve"]\n    }\n  }\n}`
+      configAfter: `{\n  "mcpServers": {\n    "costwise": {\n      "command": "costwise",\n      "args": ["serve"]\n    }\n  }\n}`
     }
   },
   serena: {
     slug: 'serena',
     name: 'Serena',
-    headline: 'CostAffective vs Serena',
+    headline: 'CostWise vs Serena',
     tagline: 'Local determinism vs third-party cloud integrations.',
-    description: 'Serena resolves symbols by dispatching source directories to external cloud API endpoints. CostAffective secures your workspace data by performing all parses on your CPU, requiring no API accounts or telemetry egress.',
+    description: 'Serena resolves symbols by dispatching source directories to external cloud API endpoints. CostWise secures your workspace data by performing all parses on your CPU, requiring no API accounts or telemetry egress.',
     features: [
       { feature: '100% Offline Indexing', costAffective: 'Yes (SQLite)', competitor: 'No (Cloud Egress)', status: 'yes' },
       { feature: 'Zero-Egress Security', costAffective: 'Yes', competitor: 'No', status: 'yes' },
@@ -86,23 +86,23 @@ export const comparisonsData: Record<string, ComparisonData> = {
     architecture: {
       costAffective: 'Decentralized local CLI binaries compiling index databases on-save.',
       competitor: 'Client-server SaaS architecture shipping code chunks to cloud parsing clusters.',
-      details: 'CostAffective runs fully in-process via stdio streams, communicating with local SQLite files.'
+      details: 'CostWise runs fully in-process via stdio streams, communicating with local SQLite files.'
     },
     migration: {
       steps: [
         'Revoke Serena cloud account access keys.',
-        'Run `costaffective install --target cursor` to inject local server configurations.'
+        'Run `costwise install --target cursor` to inject local server configurations.'
       ],
       configBefore: `{\n  "serena-agent": {\n    "token": "sk_live_512x9832",\n    "server": "https://api.serena.ai"\n  }\n}`,
-      configAfter: `{\n  "costaffective": {\n    "command": "costaffective",\n    "args": ["serve"]\n  }\n}`
+      configAfter: `{\n  "costwise": {\n    "command": "costwise",\n    "args": ["serve"]\n  }\n}`
     }
   },
   graphify: {
     slug: 'graphify',
     name: 'Graphify',
-    headline: 'CostAffective vs Graphify',
+    headline: 'CostWise vs Graphify',
     tagline: 'Pragmatic symbol tables vs dense visual graphs.',
-    description: 'Graphify converts codebases into complex spatial coordinate trees. While visually appealing, spatial nodes are highly inefficient for coding agents. CostAffective utilizes standard relational symbol maps optimized for direct scope retrievals.',
+    description: 'Graphify converts codebases into complex spatial coordinate trees. While visually appealing, spatial nodes are highly inefficient for coding agents. CostWise utilizes standard relational symbol maps optimized for direct scope retrievals.',
     features: [
       { feature: 'Token Economy Mapping', costAffective: 'Yes (scoped AST)', competitor: 'No (Sends coordinate meshes)', status: 'yes' },
       { feature: 'Fuzzy Symbol Lookup', costAffective: 'Yes', competitor: 'Yes', status: 'yes' },
@@ -119,21 +119,21 @@ export const comparisonsData: Record<string, ComparisonData> = {
     architecture: {
       costAffective: 'SQLite database with symbol, caller, and reference scopes.',
       competitor: 'Custom graph database files requiring spatial clustering libraries.',
-      details: 'CostAffective maps AST tags directly to filenames and line bounds, yielding minimal runtime query costs.'
+      details: 'CostWise maps AST tags directly to filenames and line bounds, yielding minimal runtime query costs.'
     },
     migration: {
       steps: [
         'Disable Graphify database processes.',
-        'Run `costaffective doctor` to verify local system compiler dependencies.'
+        'Run `costwise doctor` to verify local system compiler dependencies.'
       ],
       configBefore: `{\n  "graphify-db": "/var/lib/graphify.db"\n}`,
-      configAfter: `{\n  "costaffective": {\n    "command": "costaffective",\n    "args": ["serve"]\n  }\n}`
+      configAfter: `{\n  "costwise": {\n    "command": "costwise",\n    "args": ["serve"]\n  }\n}`
     }
   },
   ripgrep: {
     slug: 'ripgrep',
     name: 'Ripgrep',
-    headline: 'CostAffective vs Ripgrep (Grep)',
+    headline: 'CostWise vs Ripgrep (Grep)',
     tagline: 'Contextual semantics vs literal regex scanners.',
     description: 'Ripgrep is an incredibly fast tool for searching strings. However, search is not retrieval. Standard grep engines do not understand function boundaries, scopes, or type implementations, returning huge pages of noisy context.',
     features: [
@@ -152,15 +152,15 @@ export const comparisonsData: Record<string, ComparisonData> = {
     architecture: {
       costAffective: 'Indexes parsed symbols using AST nodes to identify declarations.',
       competitor: 'Linear regex search traversing all raw files on disk.',
-      details: 'CostAffective maps relationships statically, executing lookup queries in microseconds without scanning disk files during agent steps.'
+      details: 'CostWise maps relationships statically, executing lookup queries in microseconds without scanning disk files during agent steps.'
     },
     migration: {
       steps: [
         'Keep ripgrep as a fallback regex tool.',
-        'Add CostAffective to your MCP setup to provide semantic symbol retrieval.'
+        'Add CostWise to your MCP setup to provide semantic symbol retrieval.'
       ],
       configBefore: `{\n  "grep": "rg --files"\n}`,
-      configAfter: `{\n  "costaffective": {\n    "command": "costaffective",\n    "args": ["serve"]\n  }\n}`
+      configAfter: `{\n  "costwise": {\n    "command": "costwise",\n    "args": ["serve"]\n  }\n}`
     }
   }
 };

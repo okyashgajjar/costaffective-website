@@ -8,8 +8,9 @@ export function generateStaticParams() {
     { slug: 'find-symbol' },
     { slug: 'find-references' },
     { slug: 'find-callers' },
-    { slug: 'grep-code' },
+    { slug: 'read-symbol' },
     { slug: 'repository-summary' },
+    { slug: 'session-brief' },
     { slug: 'index-repository' },
     { slug: 'remember' },
     { slug: 'stash-context' },
@@ -106,23 +107,23 @@ const TOOLS: Record<string, ToolDetail> = {
       'Use the module argument to drill into one directory instead of widening the whole summary.'
     ],
     exampleInput: `{\n  "repo_path": "/path/to/repo",\n  "budget": "small"\n}`,
-    exampleOutput: `Files: 100\nSymbols: 988\nTest Files: 22\nLanguages: go:99, python:1\nModules:\n  retrieval (go) - 26 files, 296 symbols\n  treesitter (go) - 12 files, 105 symbols\n  +23 more modules (62 files, 587 symbols)\nEntry Points: cmd/costaffective/main.go`
+    exampleOutput: `Files: 100\nSymbols: 988\nTest Files: 22\nLanguages: go:99, python:1\nModules:\n  retrieval (go) - 26 files, 296 symbols\n  treesitter (go) - 12 files, 105 symbols\n  +23 more modules (62 files, 587 symbols)\nEntry Points: cmd/costwise/main.go`
   },
-  'grep-code': {
-    name: 'grep_code',
-    purpose: 'Regex and full-text fallback search across the repository, for when a literal text match is more useful than a structural query.',
+  'read-symbol': {
+    name: 'read_symbol',
+    purpose: 'Return the full source code of a symbol (function, method, or type) by name — the implementation body itself, not just its location. Use this instead of reading a whole file when you need to see how something is implemented.',
     inputs: [
-      { name: 'pattern', type: 'string', required: true, desc: 'Regex or exact text pattern to search.' },
       { name: 'repo_path', type: 'string', required: true, desc: 'Absolute path to the workspace root.' },
-      { name: 'budget', type: 'string', required: false, desc: 'Token boundary limit (small, medium, large).' }
+      { name: 'symbol', type: 'string', required: true, desc: 'Symbol name to read (function/method/type).' },
+      { name: 'budget', type: 'string', required: false, desc: 'Token budget: small (500), medium (1500), large (3000). Default medium.' }
     ],
-    outputs: 'Matching lines with file and line coordinates, trimmed to the token budget.',
+    outputs: 'The full source code of the matching symbol, extracted from the indexed line range.',
     bestPractices: [
-      'Reach for the structural tools (find_symbol, search_code) first; use grep_code when only a literal match will do.',
-      'Supply a budget on broad patterns to avoid flooding the context window.'
+      'Use this instead of reading a whole file when you need to see how a specific function or type is implemented.',
+      'Pair with find_symbol to first locate the definition, then read the body.'
     ],
-    exampleInput: `{\n  "pattern": "WithInstructions",\n  "repo_path": "/path/to/repo",\n  "budget": "small"\n}`,
-    exampleOutput: `[\n  {\n    "file": "internal/mcpserver/server.go",\n    "line": 14,\n    "content": "server.WithInstructions(skill.Instructions()),"\n  }\n]`
+    exampleInput: `{\n  "symbol": "NewServer",\n  "repo_path": "/path/to/repo",\n  "budget": "medium"\n}`,
+    exampleOutput: `// internal/mcpserver/server.go:42-60\nfunc NewServer() *Server {\n\treturn &Server{\n\t\ttools:   make(map[string]mcp.Tool),\n\t\thandlers: make(map[string]func(mcp.CallToolRequest) (*mcp.CallToolResult, error)),\n\t}\n}`
   },
   'index-repository': {
     name: 'index_repository',
@@ -170,6 +171,23 @@ const TOOLS: Record<string, ToolDetail> = {
     exampleInput: `{\n  "repo_path": "/path/to/repo",\n  "content": "<5,000 lines of build log>",\n  "label": "ci-build-log"\n}`,
     exampleOutput: `Stashed "ci-build-log" -> a1b2c3d4e5f6 (~18000 tokens kept out of context). Read only what you need with recall(source="a1b2c3d4e5f6", query=...).`
   },
+  'session-brief': {
+    name: 'session_brief',
+    purpose: 'Get a compact summary of what happened in past session(s) on this repo — facts remembered, content stashed, files reindexed. Use this to catch up before starting work, instead of re-deriving context from scratch.',
+    inputs: [
+      { name: 'repo_path', type: 'string', required: true, desc: 'Absolute path to the workspace root.' },
+      { name: 'scope', type: 'string', required: false, desc: 'Scope: "last" (default, since last session boundary), "today", "all".' },
+      { name: 'budget', type: 'string', required: false, desc: 'Token budget (default 300). Events are oldest-first within scope.' },
+      { name: 'sessions', type: 'string', required: false, desc: 'Number of past sessions to return (e.g. "5" for last 5). Overrides scope.' }
+    ],
+    outputs: 'A compact text summary of past session activity: facts remembered, content stashed, and files reindexed, within the budget.',
+    bestPractices: [
+      'Call this at the start of a new session to catch up on context without re-reading earlier conversations.',
+      'Use the scope or sessions parameter to control how far back to look.'
+    ],
+    exampleInput: `{\n  "repo_path": "/path/to/repo",\n  "scope": "last",\n  "budget": "300"\n}`,
+    exampleOutput: `=== Session Brief (last session) ===\nRemembered facts:\n  auth-entrypoint: "Auth starts in server/auth.go Login()."\nStashed content:\n  ci-build-log (handle: a1b2c3, ~18k tokens)\nFiles reindexed: 0`
+  },
   'recall': {
     name: 'recall',
     purpose: 'Take back only what you need: the budgeted slice of a stashed blob (by handle), or matching remembered facts, instead of re-reading the whole thing. This is the read side of the stash/recall loop.',
@@ -195,7 +213,7 @@ export async function generateMetadata({ params }: PageProps) {
   if (!tool) return { title: 'Tool Not Found' };
   
   return {
-    title: `MCP Tool: ${tool.name} | CostAffective Specs`,
+    title: `MCP Tool: ${tool.name} | CostWise Specs`,
     description: `Learn how AI coding agents execute the ${tool.name} tool. Explore arguments, outputs, and copy-paste schemas.`,
     alternates: { canonical: `/tools/${slug}` },
   };
@@ -211,7 +229,7 @@ export default async function ToolDetailPage({ params }: PageProps) {
   const schemaLd = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
-    'name': `CostAffective MCP Tool: ${tool.name}`,
+    'name': `CostWise MCP Tool: ${tool.name}`,
     'description': tool.purpose
   };
 

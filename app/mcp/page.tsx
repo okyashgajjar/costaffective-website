@@ -2,8 +2,8 @@ import Link from 'next/link';
 import { Shield, GitCommit, HelpCircle, Terminal } from 'lucide-react';
 
 export const metadata = {
-  title: 'MCP Specification Details',
-  description: 'Technical breakdown of the Model Context Protocol (MCP) server stdio handshake sequences.',
+  title: 'MCP Server Protocol — Model Context Protocol Stdio Handshake Spec | CostWise',
+  description: 'Complete technical breakdown of the Model Context Protocol (MCP) server stdio handshake, JSON-RPC tool execution, and transport specification used by CostWise-MCP. Learn how MCP servers communicate with AI coding agents.',
 };
 
 export default function MCPSpecs() {
@@ -11,7 +11,7 @@ export default function MCPSpecs() {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     'name': 'Model Context Protocol Specifications',
-    'description': 'Handshake protocols, JSON schema standards, and transport specifications used by CostAffective.'
+    'description': 'Handshake protocols, JSON schema standards, and transport specifications used by CostWise.'
   };
 
   return (
@@ -27,7 +27,7 @@ export default function MCPSpecs() {
           <span className="section-pill">Protocol Specs</span>
           <h1 className="font-serif font-bold text-4xl mb-4 text-charcoal">Model Context Protocol</h1>
           <p className="section-desc">
-            Understand how CostAffective integrates into the open standard designed by Anthropic.
+            Understand how CostWise integrates into the open standard designed by Anthropic.
           </p>
         </div>
 
@@ -36,7 +36,7 @@ export default function MCPSpecs() {
           <div>
             <h2 className="font-serif font-bold text-2xl text-charcoal mb-4">The Stdio Handshake</h2>
             <p className="text-light text-sm mb-4 leading-relaxed">
-              When an assistant client starts CostAffective via the <code>costaffective serve</code> subprocess command, it initializes a bidirectional JSON-RPC channel over standard I/O (stdio).
+              When an assistant client starts CostWise via the <code>costwise serve</code> subprocess command, it initializes a bidirectional JSON-RPC channel over standard I/O (stdio).
             </p>
             <p className="text-light text-sm mb-4 leading-relaxed">
               Client sends initialization payloads containing client info and capabilities, and the server returns registered tool names, schemas, and descriptions.
@@ -72,7 +72,7 @@ export default function MCPSpecs() {
         <div className="bg-[#FAF9F6] border border-[#E5E5E0] rounded-lg p-8">
           <h2 className="font-serif font-bold text-2xl text-charcoal mb-4">Schema Mappings & Validation</h2>
           <p className="text-light text-sm mb-6">
-            CostAffective implements strict validation structures for incoming tool queries, ensuring data format matching.
+            CostWise implements strict validation structures for incoming tool queries, ensuring data format matching.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-white border border-[#E5E5E0] p-5 rounded shadow-sm">
