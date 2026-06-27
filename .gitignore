@@ -122,3 +122,6 @@ screen_d1.html
 styles.css
 
 .mycli-fts/
+.mycli/*.db
+.mycli/*.db-shm
+.mycli/*.db-wal

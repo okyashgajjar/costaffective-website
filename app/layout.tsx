@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Inter, Lora, JetBrains_Mono, Fraunces } from 'next/font/google';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import AnimatedMain from '@/components/AnimatedMain';
+import AnimatedBackground from '@/components/AnimatedBackground';
 import './globals.css';
 
 const inter = Inter({
@@ -227,9 +229,12 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased min-h-screen flex flex-col pt-[72px]">
+        <AnimatedBackground />
         <Navbar />
         <main className="flex-grow">
-          {children}
+          <AnimatedMain>
+            {children}
+          </AnimatedMain>
         </main>
         <Footer />
       </body>
